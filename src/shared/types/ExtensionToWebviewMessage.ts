@@ -18,4 +18,5 @@ export type ExtensionToWebviewMessage =
     }
   | { type: "error"; message: string }
   | { type: "log"; message: string }
-  | { type: "loadScene"; snapshot: unknown | null };
+  | { type: "loadScene"; snapshot: unknown | null }
+  | { type: "autoRender"; enabled: boolean; pending: boolean };

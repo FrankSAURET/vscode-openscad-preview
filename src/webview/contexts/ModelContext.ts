@@ -6,8 +6,13 @@ export interface ModelContext {
   base64Data: string | null;
   isLoading: boolean;
   loadingMessage: string;
+  /** Re-render automatically on file save or parameter change. */
+  autoRender: boolean;
+  /** Changes arrived while automatic rendering was off. */
+  renderPending: boolean;
   export: () => void;
   sendToSlicer: () => void;
+  toggleAutoRender: () => void;
 }
 
 export const modelContext = createContext<ModelContext>("model");

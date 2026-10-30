@@ -1,5 +1,17 @@
 # vscode-openscad-preview
 
+## 2026.10.0 (prochaine publication)
+
+### Nouveauté
+
+- Interface entièrement traduite en français (aperçu, panneaux, notifications, réglages, commande). La langue suit celle de VS Code ; l'anglais reste la langue par défaut.
+- Bulle d'aide au survol de chaque contrôle de l'aperçu : elle explique ce que fait le bouton, le champ ou l'onglet.
+- Bouton « Aperçu automatique » en tête des options : il suspend ou relance le recalcul du modèle à chaque modification. En pause, un bandeau signale les modifications en attente ; la réactivation lance le calcul.
+
+### Modification
+
+- Fork publié sous l'identifiant `electropol-fr.openscad-preview-fr`, numéroté en calver.
+
 ## 0.7.0
 
 ### Minor Changes

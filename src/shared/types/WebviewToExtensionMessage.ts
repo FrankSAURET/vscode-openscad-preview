@@ -12,4 +12,5 @@ export type WebviewToExtensionMessage =
   | { type: "exportModel" }
   | { type: "sendToSlicer" }
   | { type: "persistScene"; snapshot: unknown }
+  | { type: "setAutoRender"; enabled: boolean }
   | { type: "error"; message: string };

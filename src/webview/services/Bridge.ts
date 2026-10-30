@@ -60,6 +60,10 @@ export class Bridge {
     vscode.postMessage({ type: "sendToSlicer" });
   }
 
+  public setAutoRender(enabled: boolean) {
+    vscode.postMessage({ type: "setAutoRender", enabled });
+  }
+
   public persistScene(snapshot: unknown) {
     vscode.postMessage({ type: "persistScene", snapshot });
   }

@@ -1,16 +1,18 @@
 {
-  "name": "vscode-openscad-preview",
-  "displayName": "OpenSCAD Preview",
-  "description": "An interactive 3D preview environment for OpenSCAD (.scad) files.",
-  "publisher": "thijsdaniels",
-  "version": "0.7.0",
+  "name": "openscad-preview-fr",
+  "displayName": "%extension.displayName%",
+  "description": "%extension.description%",
+  "publisher": "electropol-fr",
+  "version": "2026.10.0",
+  "buildNumber": 1,
   "icon": "icon.png",
-  "author": "Thijs Daniels",
+  "author": "Thijs Daniels, Frank SAURET",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/thijsdaniels/vscode-openscad-preview.git"
+    "url": "https://github.com/FrankSAURET/vscode-openscad-preview.git"
   },
+  "l10n": "./l10n",
   "type": "module",
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -65,29 +67,29 @@
             "stl"
           ],
           "default": "3mf",
-          "description": "The format to use for the 3D preview. 3MF supports colors but requires OpenSCAD Nightly. STL is universally supported."
+          "description": "%config.previewFormat%"
         },
         "openscad.slicerExecutable": {
           "type": "string",
           "default": "",
-          "description": "Optional path to the slicer executable (e.g., Bambu Studio or PrusaSlicer). If left empty, the OS default application for the 3D model will be used."
+          "description": "%config.slicerExecutable%"
         },
         "openscad.executablePath": {
           "type": "string",
           "default": "",
-          "description": "Path to the OpenSCAD executable. Leave empty to use automatic detection or the system PATH."
+          "description": "%config.executablePath%"
         },
         "openscad.enableLazyUnion": {
           "type": "boolean",
           "default": false,
-          "description": "Enable lazy unions, creating a multi-part exported object."
+          "description": "%config.enableLazyUnion%"
         }
       }
     },
     "commands": [
       {
         "command": "openscad.showPanel",
-        "title": "Show OpenSCAD Preview",
+        "title": "%command.showPanel%",
         "icon": "$(open-preview)"
       }
     ],
@@ -141,6 +143,9 @@
     "snippets",
     "syntaxes",
     "language-configuration.json",
+    "l10n",
+    "package.nls.json",
+    "package.nls.fr.json",
     "icon.png",
     "LICENSE.md",
     "CHANGELOG.md",

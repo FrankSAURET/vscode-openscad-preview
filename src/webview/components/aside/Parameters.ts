@@ -8,6 +8,7 @@ import {
   parameterContext,
   ParameterContext,
 } from "../../contexts/ParameterContext";
+import { t } from "../../i18n/t";
 import "../atoms/Collapsible";
 import "../atoms/Field";
 import "../atoms/NumberField";
@@ -94,16 +95,17 @@ export class Parameters extends LitElement {
     const setNames = Object.keys(parameterSets || {});
 
     return html`
-      <scad-collapsible heading="Preset" open>
+      <scad-collapsible heading=${t("parameters.preset")} open>
         <div class="preset-controls">
           <vscode-single-select
+            title=${t("parameters.presetSelect.tip")}
             .value=${activeSetName || ""}
             @change=${(e: Event) => {
               const val = (e.target as HTMLSelectElement).value;
               this.parameterContext.applySet(val ? val : undefined);
             }}
           >
-            <vscode-option value="">None</vscode-option>
+            <vscode-option value="">${t("parameters.presetNone")}</vscode-option>
             ${setNames.map(
               (name) =>
                 html`<vscode-option value="${name}">${name}</vscode-option>`,
@@ -114,12 +116,14 @@ export class Parameters extends LitElement {
               ? html`
                   <vscode-toolbar-button
                     icon="save"
-                    title="Save Active Preset"
+                    label=${t("parameters.saveActive")}
+                    title=${t("parameters.saveActive.tip")}
                     @click=${() => this.parameterContext.saveSet(activeSetName)}
                   ></vscode-toolbar-button>
                   <vscode-toolbar-button
                     icon="trash"
-                    title="Delete Active Preset"
+                    label=${t("parameters.deleteActive")}
+                    title=${t("parameters.deleteActive.tip")}
                     @click=${() =>
                       this.parameterContext.deleteSet(activeSetName)}
                   ></vscode-toolbar-button>
@@ -127,7 +131,8 @@ export class Parameters extends LitElement {
               : nothing}
             <vscode-toolbar-button
               icon="save-as"
-              title="Save as New Preset"
+              label=${t("parameters.saveAsNew")}
+              title=${t("parameters.saveAsNew.tip")}
               @click=${() => this.parameterContext.saveAsNewSet()}
             ></vscode-toolbar-button>
           </div>
@@ -143,14 +148,20 @@ export class Parameters extends LitElement {
               return html`
                 <scad-field
                   label=${this.formatParameterName(parameter.name, groupName)}
-                  title=${parameter.description}
+                  tooltip=${t(
+                    "parameters.field.tip",
+                    parameter.description ||
+                      this.formatParameterName(parameter.name, groupName),
+                    parameter.name,
+                  )}
                 >
                   ${isOverridden
                     ? html`
                         <vscode-toolbar-button
                           slot="actions"
                           icon="discard"
-                          title="Revert"
+                          label=${t("parameters.revert")}
+                          title=${t("parameters.revert.tip")}
                           @click=${() =>
                             this.handleInputChange(parameter.name, undefined)}
                         ></vscode-toolbar-button>
@@ -165,16 +176,16 @@ export class Parameters extends LitElement {
       )}
       <div class="export-container">
         <vscode-button
-          title="Send Model to 3D Slicer"
+          title=${t("parameters.print.tip")}
           @click=${() => this.modelContext.sendToSlicer()}
         >
-          Print
+          ${t("parameters.print")}
         </vscode-button>
         <vscode-button
-          title="Write Model to File System"
+          title=${t("parameters.export.tip")}
           @click=${() => this.modelContext.export()}
         >
-          Export
+          ${t("parameters.export")}
         </vscode-button>
       </div>
     `;
@@ -184,7 +195,7 @@ export class Parameters extends LitElement {
     const groups = new Map<string, ScadParameter[]>();
 
     parameters.forEach((parameter) => {
-      const group = parameter.group || "Parameters";
+      const group = parameter.group || t("parameters.defaultGroup");
 
       if (!groups.has(group)) {
         groups.set(group, []);
@@ -239,6 +250,7 @@ export class Parameters extends LitElement {
     if (param.type === "string" && "options" in param && param.options) {
       return html`
         <vscode-single-select
+          title=${t("parameters.select.tip")}
           .value=${currentValue}
           @change=${(e: Event) =>
             this.handleInputChange(
@@ -260,6 +272,7 @@ export class Parameters extends LitElement {
     if (param.type === "number" && "options" in param && param.options) {
       return html`
         <vscode-single-select
+          title=${t("parameters.select.tip")}
           .value=${currentValue?.toString()}
           @change=${(e: Event) =>
             this.handleInputChange(
@@ -282,6 +295,7 @@ export class Parameters extends LitElement {
       case "boolean":
         return html`
           <vscode-checkbox
+            title=${t("parameters.checkbox.tip")}
             ?indeterminate=${false}
             .checked=${currentValue}
             @change=${(e: Event) =>
@@ -307,6 +321,7 @@ export class Parameters extends LitElement {
       case "string":
         return html`
           <vscode-textfield
+            title=${t("parameters.text.tip")}
             size="3"
             .value=${currentValue}
             @change=${(e: Event) =>

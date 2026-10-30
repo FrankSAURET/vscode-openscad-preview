@@ -35,6 +35,7 @@ import {
 import { LogController } from "../controllers/LogController";
 import { bridge } from "../services/Bridge";
 import { defaultScene } from "../data/defaultScene";
+import { t } from "../i18n/t";
 import { sceneObjectMeta } from "../data/sceneObjectMeta";
 import "./aside/SidePanel";
 import "./atoms/SplitLayout";
@@ -142,9 +143,14 @@ export class App extends LitElement {
     format: null,
     base64Data: null,
     isLoading: true,
-    loadingMessage: "Rendering SCAD...",
+    loadingMessage: t("preview.rendering"),
+    autoRender: true,
+    renderPending: false,
     export: bridge.exportModel,
     sendToSlicer: bridge.sendToSlicer,
+    toggleAutoRender: () => {
+      bridge.setAutoRender(!this.modelContext.autoRender);
+    },
   };
 
   @provide({ context: activeToolContext })
@@ -415,7 +421,14 @@ export class App extends LitElement {
         this.modelContext = {
           ...this.modelContext,
           isLoading: message.loading,
-          loadingMessage: message.message ?? "Rendering SCAD...",
+          loadingMessage: message.message ?? t("preview.rendering"),
+        };
+        break;
+      case "autoRender":
+        this.modelContext = {
+          ...this.modelContext,
+          autoRender: message.enabled,
+          renderPending: message.pending,
         };
         break;
       case "log":

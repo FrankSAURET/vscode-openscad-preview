@@ -11,6 +11,7 @@ import {
   viewOptionsContext,
   ViewOptionsContext,
 } from "../../contexts/ViewOptionsContext";
+import { t } from "../../i18n/t";
 import { Stage, Theme } from "../../preview/Stage";
 
 declare global {
@@ -203,11 +204,21 @@ export class Preview extends LitElement {
             <div id="loading-overlay">
               <div class="spinner"></div>
               <div>
-                ${this.modelContext?.loadingMessage ?? "Rendering SCAD..."}
+                ${this.modelContext?.loadingMessage ?? t("preview.rendering")}
               </div>
             </div>
           `
-        : ""}
+        : this.modelContext.autoRender
+          ? ""
+          : html`
+              <div id="loading-overlay">
+                <div>
+                  ${this.modelContext.renderPending
+                    ? t("preview.pausedPending")
+                    : t("preview.paused")}
+                </div>
+              </div>
+            `}
       <div id="canvas-container"></div>
     `;
   }
