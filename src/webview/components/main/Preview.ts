@@ -1,5 +1,5 @@
 import { consume } from "@lit/context";
-import { css, html, LitElement } from "lit";
+import { css, html, LitElement, nothing } from "lit";
 import { customElement, query, state } from "lit/decorators.js";
 import { Color } from "three";
 import {
@@ -198,29 +198,35 @@ export class Preview extends LitElement {
   }
 
   render() {
-    return html`
-      ${this.modelContext?.isLoading || !this.modelContext?.base64Data
-        ? html`
-            <div id="loading-overlay">
-              <div class="spinner"></div>
-              <div>
-                ${this.modelContext?.loadingMessage ?? t("preview.rendering")}
-              </div>
-            </div>
-          `
-        : this.modelContext.autoRender
-          ? ""
-          : html`
-              <div id="loading-overlay">
-                <div>
-                  ${this.modelContext.renderPending
-                    ? t("preview.pausedPending")
-                    : t("preview.paused")}
-                </div>
-              </div>
-            `}
-      <div id="canvas-container"></div>
-    `;
+    return html`${this.renderOverlay()}
+      <div id="canvas-container"></div>`;
+  }
+
+  private renderOverlay() {
+    const model = this.modelContext;
+    // Nothing rendered yet and waiting for a click: no spinner.
+    if (
+      model &&
+      !model.autoRender &&
+      model.renderPending &&
+      !model.base64Data
+    ) {
+      return html`<div id="loading-overlay">
+        <div>${t("preview.idle")}</div>
+      </div>`;
+    }
+    if (model?.isLoading || !model?.base64Data) {
+      return html`<div id="loading-overlay">
+        <div class="spinner"></div>
+        <div>${model?.loadingMessage ?? t("preview.rendering")}</div>
+      </div>`;
+    }
+    if (model.renderPending) {
+      return html`<div id="loading-overlay">
+        <div>${t("preview.pending")}</div>
+      </div>`;
+    }
+    return nothing;
   }
 }
 

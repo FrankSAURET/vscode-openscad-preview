@@ -85,9 +85,12 @@ export class Options extends LitElement {
         <scad-icon-button
           label=${t("options.autoRender")}
           tooltip=${t("options.autoRender.tip")}
-          toggleable
-          .checked=${this.modelContext?.autoRender ?? true}
-          @change=${() => this.modelContext.toggleAutoRender()}
+          .latched=${this.modelContext?.autoRender ?? false}
+          @click=${(e: MouseEvent) => {
+            // Ctrl+click latches automatic preview; plain click renders once.
+            if (e.ctrlKey || e.metaKey) this.modelContext.toggleAutoRender();
+            else this.modelContext.renderNow();
+          }}
         >
           <scad-icon name="auto-render"></scad-icon>
         </scad-icon-button>

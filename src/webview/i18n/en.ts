@@ -22,8 +22,8 @@ export const en = {
   "tool.measure.face.tip": "Snap to faces: measurement points are placed anywhere on the surface of the model.",
 
   // View options
-  "options.autoRender": "Automatic preview",
-  "options.autoRender.tip": "Automatic preview: when on, the model is re-rendered every time the file is saved or a parameter changes. Turn it off to edit heavy models without waiting; turning it back on renders the pending changes.",
+  "options.autoRender": "Preview",
+  "options.autoRender.tip": "Preview: click to render the model now. Ctrl+click to lock automatic preview (button greyed): the model is then re-rendered on every save or parameter change. Ctrl+click again to unlock.",
   "options.camera": "Switch camera",
   "options.camera.tip": "Switch camera: choose which scene camera is used for the 3D view.",
   "options.perspective": "Perspective",
@@ -158,8 +158,8 @@ export const en = {
 
   // Preview overlay
   "preview.rendering": "Rendering SCAD...",
-  "preview.paused": "Automatic preview paused",
-  "preview.pausedPending": "Automatic preview paused — changes not rendered yet",
+  "preview.idle": "Click the Preview button to render the model",
+  "preview.pending": "Changes not rendered yet — click Preview",
 } as const;
 
 export type MessageKey = keyof typeof en;

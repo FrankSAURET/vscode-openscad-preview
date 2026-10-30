@@ -47,8 +47,9 @@ export class ScadSession {
   }>();
   public readonly onAutoRenderChanged = this._onAutoRenderChanged.event;
 
-  // When off, file and parameter changes are queued instead of rendered.
-  private _autoRender = true;
+  // When off (default), file and parameter changes are queued until the user
+  // asks for a render; when latched on, every change is rendered at once.
+  private _autoRender = false;
   private renderPending = false;
 
   constructor(public readonly documentUri: Uri) {
@@ -142,6 +143,16 @@ export class ScadSession {
       this.renderPending = false;
       this.requestRender();
     }
+    this._onAutoRenderChanged.fire(this.autoRender);
+  }
+
+  /** Renders the current state once, whatever the automatic mode. */
+  public renderNow() {
+    this.renderPending = false;
+    this.scadRenderer.render(
+      this.documentUri.fsPath,
+      this.scadParameters.getActiveValues(),
+    );
     this._onAutoRenderChanged.fire(this.autoRender);
   }
 

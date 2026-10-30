@@ -64,6 +64,10 @@ export class Bridge {
     vscode.postMessage({ type: "setAutoRender", enabled });
   }
 
+  public renderNow() {
+    vscode.postMessage({ type: "renderNow" });
+  }
+
   public persistScene(snapshot: unknown) {
     vscode.postMessage({ type: "persistScene", snapshot });
   }

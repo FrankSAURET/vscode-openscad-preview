@@ -144,10 +144,11 @@ export class App extends LitElement {
     base64Data: null,
     isLoading: true,
     loadingMessage: t("preview.rendering"),
-    autoRender: true,
+    autoRender: false,
     renderPending: false,
     export: bridge.exportModel,
     sendToSlicer: bridge.sendToSlicer,
+    renderNow: () => bridge.renderNow(),
     toggleAutoRender: () => {
       bridge.setAutoRender(!this.modelContext.autoRender);
     },

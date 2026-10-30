@@ -102,6 +102,9 @@ export class ScadWebviewPanel {
           case "setAutoRender":
             this.session.setAutoRender(message.enabled);
             return;
+          case "renderNow":
+            this.session.renderNow();
+            return;
           case "persistScene":
             this.workspaceState.update(this.sceneStateKey, message.snapshot);
             return;

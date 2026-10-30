@@ -21,8 +21,8 @@ export const fr: Record<MessageKey, string> = {
   "tool.measure.face.tip": "Accroche aux faces : les points de mesure se placent n'importe où sur la surface du modèle.",
 
   // Options d'affichage
-  "options.autoRender": "Aperçu automatique",
-  "options.autoRender.tip": "Aperçu automatique : activé, le modèle est recalculé à chaque enregistrement du fichier ou changement de paramètre. Le désactiver pour modifier un modèle lourd sans attendre ; le réactiver calcule les modifications en attente.",
+  "options.autoRender": "Prévisualiser",
+  "options.autoRender.tip": "Prévisualiser : un clic calcule le modèle maintenant. Ctrl+clic fige l'aperçu automatique (bouton grisé) : le modèle est alors recalculé à chaque enregistrement ou changement de paramètre. Ctrl+clic à nouveau pour le libérer.",
   "options.camera": "Changer de caméra",
   "options.camera.tip": "Changer de caméra : choisir la caméra de la scène utilisée pour la vue 3D.",
   "options.perspective": "Perspective",
@@ -157,6 +157,6 @@ export const fr: Record<MessageKey, string> = {
 
   // Bandeau de l'aperçu
   "preview.rendering": "Calcul du SCAD…",
-  "preview.paused": "Aperçu automatique en pause",
-  "preview.pausedPending": "Aperçu automatique en pause — modifications pas encore calculées",
+  "preview.idle": "Cliquer sur le bouton Prévisualiser pour calculer le modèle",
+  "preview.pending": "Modifications pas encore calculées — cliquer sur Prévisualiser",
 };
