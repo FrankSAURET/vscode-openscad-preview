@@ -15,6 +15,11 @@
 - Onglet Paramètres : la zone « Préréglage » (choix, enregistrement, suppression) reste toujours visible en haut ; seuls les groupes de paramètres défilent.
 - Fork publié sous l'identifiant `electropol-fr.openscad-preview-fr`, numéroté en calver.
 
+### Correction
+
+- La description d'un paramètre est lue dans le commentaire `// …` placé juste au-dessus de sa variable, comme dans le Customizer d'OpenSCAD. Ce commentaire l'emporte sur celui de fin de ligne, qui reste utilisé à défaut.
+- Le groupe `/* [Masqué] */` (ou `Masque`) cache ses paramètres, comme `/* [Hidden] */`.
+
 ## 0.7.0
 
 ### Minor Changes

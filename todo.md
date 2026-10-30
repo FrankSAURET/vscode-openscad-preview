@@ -2,6 +2,12 @@
 
 1. ⬜ Tester l'aperçu en français sur un vrai fichier `.scad` (bulles, bouton Prévisualiser clic / Ctrl+clic, préréglage fixe).
 
+# v2026.10.0.5
+
+1. ✅ `ScadParser` : description = ligne `// texte` juste au-dessus de la déclaration (prioritaire sur le commentaire de fin de ligne) ; remise à zéro sur ligne vide, groupe ou autre instruction.
+2. ✅ Groupes masqués : table `HIDDEN_GROUPS` (`hidden`, `masqué`, `masque`).
+3. ✅ Tests `ScadParser.test.ts` mis à jour + nouveau cas ; vérifié sur `Ratelier fil.scad` (31 paramètres, tous avec description).
+
 # v2026.10.0.4
 
 1. ✅ Réglage `openscad.parameterLabel` (`name` | `description`), type partagé `ParameterLabelMode`, messages `parameterLabel` / `setParameterLabel`.
