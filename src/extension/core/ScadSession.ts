@@ -51,6 +51,8 @@ export class ScadSession {
   // asks for a render; when latched on, every change is rendered at once.
   private _autoRender = false;
   private renderPending = false;
+  // The first render (at launch) always happens, whatever the mode.
+  private hasRendered = false;
 
   constructor(public readonly documentUri: Uri) {
     this.scadRenderer = new ScadRenderer({
@@ -149,6 +151,7 @@ export class ScadSession {
   /** Renders the current state once, whatever the automatic mode. */
   public renderNow() {
     this.renderPending = false;
+    this.hasRendered = true;
     this.scadRenderer.render(
       this.documentUri.fsPath,
       this.scadParameters.getActiveValues(),
@@ -157,7 +160,7 @@ export class ScadSession {
   }
 
   private requestRender() {
-    if (!this._autoRender) {
+    if (!this._autoRender && this.hasRendered) {
       if (!this.renderPending) {
         this.renderPending = true;
         this._onAutoRenderChanged.fire(this.autoRender);
@@ -165,6 +168,7 @@ export class ScadSession {
       return;
     }
 
+    this.hasRendered = true;
     this.scadRenderer.render(
       this.documentUri.fsPath,
       this.scadParameters.getActiveValues(),

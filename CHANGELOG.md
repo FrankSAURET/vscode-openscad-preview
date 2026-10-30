@@ -6,7 +6,7 @@
 
 - Interface entièrement traduite en français (aperçu, panneaux, notifications, réglages, commande). La langue suit celle de VS Code ; l'anglais reste la langue par défaut.
 - Bulle d'aide au survol de chaque contrôle de l'aperçu : elle explique ce que fait le bouton, le champ ou l'onglet.
-- Bouton « Prévisualiser » en tête des options : le modèle n'est plus recalculé tout seul. Un clic lance le calcul ; Ctrl+clic fige l'aperçu automatique (bouton grisé), qui recalcule alors à chaque modification ; Ctrl+clic à nouveau le libère. Un bandeau signale les modifications pas encore calculées.
+- Bouton « Prévisualiser » en tête des options : le modèle est calculé une fois à l'ouverture de l'aperçu, puis n'est plus recalculé tout seul. Un clic lance le calcul ; Ctrl+clic fige l'aperçu automatique (bouton grisé), qui recalcule alors à chaque modification ; Ctrl+clic à nouveau le libère. Un bandeau signale les modifications pas encore calculées.
 
 ### Modification
 

@@ -2,6 +2,10 @@
 
 1. ⬜ Tester l'aperçu en français sur un vrai fichier `.scad` (bulles, bouton Prévisualiser clic / Ctrl+clic, préréglage fixe).
 
+# v2026.10.0.3
+
+1. ✅ Premier calcul forcé à l'ouverture de l'aperçu, même hors mode automatique (`ScadSession.hasRendered`).
+
 # v2026.10.0.2
 
 1. ✅ Onglet Paramètres : préréglage hors zone de défilement (`.preset` fixe, `.groups` défile, boutons Imprimer/Exporter fixes en bas).
