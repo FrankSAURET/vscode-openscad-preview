@@ -69,6 +69,8 @@ export const fr: Record<MessageKey, string> = {
   "parameters.deleteActive.tip": "Supprimer le préréglage actif du fichier .json.",
   "parameters.saveAsNew": "Enregistrer comme nouveau préréglage",
   "parameters.saveAsNew.tip": "Enregistrer les valeurs actuelles comme nouveau préréglage (son nom sera demandé).",
+  "parameters.labelDescription": "Libellé depuis la description",
+  "parameters.labelDescription.tip": "Libellé depuis la description : activé, chaque champ affiche le commentaire écrit au-dessus de sa variable (accents permis) au lieu du nom de la variable. Mémorisé dans le réglage openscad.parameterLabel.",
   "parameters.defaultGroup": "Paramètres",
   "parameters.revert": "Rétablir",
   "parameters.revert.tip": "Rétablir : revenir à la valeur définie dans le fichier (ou le préréglage).",

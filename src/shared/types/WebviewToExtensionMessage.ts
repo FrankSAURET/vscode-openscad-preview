@@ -1,3 +1,5 @@
+import { ParameterLabelMode } from "./ParameterLabelMode";
+
 export type WebviewToExtensionMessage =
   | { type: "ready" }
   | {
@@ -14,4 +16,5 @@ export type WebviewToExtensionMessage =
   | { type: "persistScene"; snapshot: unknown }
   | { type: "setAutoRender"; enabled: boolean }
   | { type: "renderNow" }
+  | { type: "setParameterLabel"; mode: ParameterLabelMode }
   | { type: "error"; message: string };

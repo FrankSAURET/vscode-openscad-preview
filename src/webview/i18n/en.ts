@@ -70,6 +70,8 @@ export const en = {
   "parameters.deleteActive.tip": "Delete the active preset from the .json file.",
   "parameters.saveAsNew": "Save as New Preset",
   "parameters.saveAsNew.tip": "Save the current values as a new preset (you will be asked for its name).",
+  "parameters.labelDescription": "Label from description",
+  "parameters.labelDescription.tip": "Label from description: when on, each field shows the comment written above its variable (accents allowed) instead of the variable name. Remembered in the openscad.parameterLabel setting.",
   "parameters.defaultGroup": "Parameters",
   "parameters.revert": "Revert",
   "parameters.revert.tip": "Revert: go back to the value defined in the file (or the preset).",

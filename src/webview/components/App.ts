@@ -112,6 +112,10 @@ export class App extends LitElement {
   @state()
   parameterContext: ParameterContext = {
     parameters: [],
+    labelMode: "name",
+    setLabelMode: (mode) => {
+      bridge.setParameterLabel(mode);
+    },
     parameterSets: {},
     activeSetName: undefined,
     overrides: {},
@@ -416,6 +420,12 @@ export class App extends LitElement {
         } else {
           bridge.reportError("No parameters in update message");
         }
+        break;
+      case "parameterLabel":
+        this.parameterContext = {
+          ...this.parameterContext,
+          labelMode: message.mode,
+        };
         break;
       case "loadingState":
         this.logController.processLoadingState(message.loading);

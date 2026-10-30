@@ -95,7 +95,7 @@ export class Parameters extends LitElement {
   private parameterContext!: ParameterContext;
 
   public render() {
-    const { parameters, overrides, parameterSets, activeSetName } =
+    const { parameters, overrides, parameterSets, activeSetName, labelMode } =
       this.parameterContext;
 
     const groups = this.groupParameters(parameters);
@@ -144,6 +144,17 @@ export class Parameters extends LitElement {
               title=${t("parameters.saveAsNew.tip")}
               @click=${() => this.parameterContext.saveAsNewSet()}
             ></vscode-toolbar-button>
+            <vscode-toolbar-button
+              icon="comment"
+              label=${t("parameters.labelDescription")}
+              title=${t("parameters.labelDescription.tip")}
+              toggleable
+              .checked=${labelMode === "description"}
+              @change=${() =>
+                this.parameterContext.setLabelMode(
+                  labelMode === "description" ? "name" : "description",
+                )}
+            ></vscode-toolbar-button>
           </div>
         </div>
       </scad-collapsible>
@@ -157,7 +168,9 @@ export class Parameters extends LitElement {
 
                 return html`
                   <scad-field
-                    label=${this.formatParameterName(parameter.name, groupName)}
+                    label=${(labelMode === "description" &&
+                      parameter.description?.trim()) ||
+                    this.formatParameterName(parameter.name, groupName)}
                     tooltip=${t(
                       "parameters.field.tip",
                       parameter.description ||

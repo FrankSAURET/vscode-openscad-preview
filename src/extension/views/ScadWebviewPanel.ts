@@ -15,6 +15,7 @@ import * as path from "path";
 import * as cp from "child_process";
 import { ExtensionToWebviewMessage } from "../../shared/types/ExtensionToWebviewMessage";
 import { ModelFormat } from "../../shared/types/ModelFormat";
+import { ParameterLabelMode } from "../../shared/types/ParameterLabelMode";
 import { WebviewToExtensionMessage } from "../../shared/types/WebviewToExtensionMessage";
 import { ScadSession } from "../core/ScadSession";
 
@@ -104,6 +105,12 @@ export class ScadWebviewPanel {
             return;
           case "renderNow":
             this.session.renderNow();
+            return;
+          case "setParameterLabel":
+            // Stored globally; the configuration listener echoes it back.
+            workspace
+              .getConfiguration("openscad")
+              .update("parameterLabel", message.mode, true);
             return;
           case "persistScene":
             this.workspaceState.update(this.sceneStateKey, message.snapshot);
@@ -207,6 +214,19 @@ export class ScadWebviewPanel {
       this.disposables,
     );
 
+    workspace.onDidChangeConfiguration(
+      (event) => {
+        if (
+          this.isWebviewReady &&
+          event.affectsConfiguration("openscad.parameterLabel")
+        ) {
+          this.postParameterLabel();
+        }
+      },
+      null,
+      this.disposables,
+    );
+
     this.session.onAutoRenderChanged(
       ({ enabled, pending }) => {
         if (this.isWebviewReady) {
@@ -290,6 +310,13 @@ export class ScadWebviewPanel {
 	`;
   }
 
+  private postParameterLabel() {
+    const mode = workspace
+      .getConfiguration("openscad")
+      .get<ParameterLabelMode>("parameterLabel", "name");
+    this.postMessage({ type: "parameterLabel", mode });
+  }
+
   private pushInitialState() {
     // Send the persisted scene snapshot first so the webview can hydrate
     // before any other state arrives. `null` means "no saved scene" — the
@@ -299,6 +326,7 @@ export class ScadWebviewPanel {
 
     // The webview is recreated on tab re-focus: restore the toggle state.
     this.postMessage({ type: "autoRender", ...this.session.autoRender });
+    this.postParameterLabel();
 
     // Send initial parameters
     const params = this.session.currentParameters;

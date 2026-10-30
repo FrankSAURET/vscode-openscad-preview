@@ -1,4 +1,5 @@
 import { ExtensionToWebviewMessage } from "../../shared/types/ExtensionToWebviewMessage";
+import { ParameterLabelMode } from "../../shared/types/ParameterLabelMode";
 
 const vscode = acquireVsCodeApi();
 
@@ -66,6 +67,10 @@ export class Bridge {
 
   public renderNow() {
     vscode.postMessage({ type: "renderNow" });
+  }
+
+  public setParameterLabel(mode: ParameterLabelMode) {
+    vscode.postMessage({ type: "setParameterLabel", mode });
   }
 
   public persistScene(snapshot: unknown) {

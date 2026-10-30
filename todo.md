@@ -2,6 +2,12 @@
 
 1. ⬜ Tester l'aperçu en français sur un vrai fichier `.scad` (bulles, bouton Prévisualiser clic / Ctrl+clic, préréglage fixe).
 
+# v2026.10.0.4
+
+1. ✅ Réglage `openscad.parameterLabel` (`name` | `description`), type partagé `ParameterLabelMode`, messages `parameterLabel` / `setParameterLabel`.
+2. ✅ Bouton bascule dans la zone Préréglage ; écrit le réglage global, l'écouteur de configuration renvoie l'état à la vue web.
+3. ✅ Mode `description` : libellé = commentaire au-dessus de la variable, sinon nom mis en forme ; bulle inchangée (description + nom de variable).
+
 # v2026.10.0.3
 
 1. ✅ Premier calcul forcé à l'ouverture de l'aperçu, même hors mode automatique (`ScadSession.hasRendered`).
