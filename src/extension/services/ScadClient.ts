@@ -1,4 +1,4 @@
-import { ChildProcessWithoutNullStreams, spawn } from "child_process";
+import { ChildProcessWithoutNullStreams, execFile, spawn } from "child_process";
 import { existsSync } from "fs";
 import { readFile, unlink } from "fs/promises";
 import { tmpdir } from "os";
@@ -6,6 +6,8 @@ import { join } from "path";
 import { platform } from "process";
 import { l10n, window, workspace } from "vscode";
 import { ModelFormat } from "../../shared/types/ModelFormat";
+
+type RenderBackend = "auto" | "manifold" | "cgal";
 
 const platformDefaults: Record<string, string[]> = {
   darwin: ["/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD"],
@@ -63,6 +65,41 @@ export class ScadClient {
     return setting ? ["--enable", "lazy-union"] : [];
   }
 
+  // Probe result per executable: does it accept `--backend` (OpenSCAD ≥ 2024)?
+  private static backendSupport = new Map<string, Promise<boolean>>();
+
+  private static supportsBackend(execPath: string): Promise<boolean> {
+    let probe = this.backendSupport.get(execPath);
+    if (!probe) {
+      probe = new Promise((resolve) => {
+        // `--help` prints to stderr on some versions: scan both streams.
+        execFile(execPath, ["--help"], (_error, stdout, stderr) => {
+          const supported = `${stdout}${stderr}`.includes("--backend");
+          if (!supported) {
+            this.outputChannel.appendLine(
+              "[OpenSCAD] No --backend support (OpenSCAD < 2024): slow CGAL rendering. Install a recent OpenSCAD (nightly) to use Manifold.",
+            );
+          }
+          resolve(supported);
+        });
+      });
+      this.backendSupport.set(execPath, probe);
+    }
+    return probe;
+  }
+
+  private static async backendArgs(execPath: string): Promise<string[]> {
+    const setting = workspace
+      .getConfiguration("openscad")
+      .get<RenderBackend>("renderBackend", "auto");
+
+    if (setting === "auto") {
+      return (await this.supportsBackend(execPath)) ? ["--backend", "manifold"] : [];
+    }
+
+    return ["--backend", setting];
+  }
+
   public static async render(
     scadPath: string,
     parameters: Record<string, string | number | boolean> = {},
@@ -76,6 +113,9 @@ export class ScadClient {
       existingProcess.kill();
       this.activeProcesses.delete(scadPath);
     }
+
+    const execPath = ScadClient.executablePath;
+    const backend = await this.backendArgs(execPath);
 
     return new Promise((resolve, reject) => {
       const tmpFile = join(
@@ -93,10 +133,10 @@ export class ScadClient {
         paramArgs.push("-D", `${name}=${value}`);
       }
 
-      const execPath = ScadClient.executablePath;
       const args = [
         "--export-format",
         format,
+        ...backend,
         ...this.enableLazyUnion,
         "-o",
         tmpFile,

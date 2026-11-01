@@ -2,6 +2,11 @@
 
 1. ✅ Tester l'aperçu en français sur un vrai fichier `.scad` (bulles, bouton Prévisualiser clic / Ctrl+clic, préréglage fixe).
 
+# v2026.10.0.7
+
+1. ✅ Moteur de calcul : réglage `openscad.renderBackend` (`auto` | `manifold` | `cgal`). `auto` sonde `openscad --help` une fois par exécutable (`--backend` présent → Manifold), sinon CGAL + message dans la sortie.
+2. ℹ️ OpenSCAD installé sur le poste : 2021.01 (CGAL seul). Gain réel seulement après installation d'une nightly.
+
 # v2026.10.0.6
 
 1. ✅ Icônes couleur à relief : `atoms/icons/` (`iconPalette.ts`, `drawnIcons.ts` isométriques, `fluentIcons.generated.ts`), `Icon.ts` les rend via `unsafeSVG` + ombre portée.
