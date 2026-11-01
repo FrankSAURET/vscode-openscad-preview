@@ -29,6 +29,7 @@ const colored: Record<string, string> = {
   add: "add_circle",
   warning: "warning",
   "auto-render": "arrow_sync",
+  file: "document",
 };
 
 const filled: Record<string, { fluent: string; palette: PaletteName }> = {
@@ -52,6 +53,8 @@ const filled: Record<string, { fluent: string; palette: PaletteName }> = {
   "chevron-down": { fluent: "chevron_down", palette: "grey" },
   info: { fluent: "info", palette: "blue" },
   error: { fluent: "error_circle", palette: "red" },
+  folder: { fluent: "folder_open", palette: "orange" },
+  font: { fluent: "text_font", palette: "purple" },
 };
 
 const codicons: Record<string, { codicon: string; palette: PaletteName }> = {

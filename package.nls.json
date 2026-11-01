@@ -12,5 +12,6 @@
   "config.parameterLabel":"Label of the fields in the Parameters tab.",
   "config.parameterLabel.name": "Variable name, formatted (default).",
   "config.parameterLabel.description": "Comment written above the variable (accents allowed); the variable name when there is no comment.",
+  "config.defaultColor": "Color of the model in the preview where the code sets no color(). Empty: the editor text color.",
   "command.showPanel": "Show OpenSCAD Preview"
 }

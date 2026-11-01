@@ -18,6 +18,7 @@ import { ModelFormat } from "../../shared/types/ModelFormat";
 import { ParameterLabelMode } from "../../shared/types/ParameterLabelMode";
 import { WebviewToExtensionMessage } from "../../shared/types/WebviewToExtensionMessage";
 import { ScadSession } from "../core/ScadSession";
+import { PARAMETER_PICKERS } from "../services/ParameterPickers";
 
 export class ScadWebviewPanel {
   private readonly panel: WebviewPanel;
@@ -64,6 +65,9 @@ export class ScadWebviewPanel {
             return;
           case "parameterChanged":
             this.session.updateParameterValue(message.name, message.value);
+            return;
+          case "pickParameterValue":
+            this.pickParameterValue(message.name);
             return;
           case "saveParameterSet":
             this.session.saveParameterSet(message.name);
@@ -222,6 +226,12 @@ export class ScadWebviewPanel {
         ) {
           this.postParameterLabel();
         }
+        if (
+          this.isWebviewReady &&
+          event.affectsConfiguration("openscad.defaultColor")
+        ) {
+          this.postDefaultColor();
+        }
       },
       null,
       this.disposables,
@@ -317,6 +327,29 @@ export class ScadWebviewPanel {
     this.postMessage({ type: "parameterLabel", mode });
   }
 
+  private async pickParameterValue(name: string) {
+    const param = this.session.currentParameters.find((p) => p.name === name);
+    if (param?.type !== "string" || !param.editor) return;
+    const picker = PARAMETER_PICKERS[param.editor];
+    if (!picker) return;
+
+    const current = String(this.session.currentOverrides[name] ?? param.value);
+    const value = await picker(
+      param,
+      current,
+      path.dirname(this.session.documentUri.fsPath),
+    );
+    // The override echoes back to the webview through onParametersChanged.
+    if (value !== undefined) this.session.updateParameterValue(name, value);
+  }
+
+  private postDefaultColor() {
+    const color = workspace
+      .getConfiguration("openscad")
+      .get<string>("defaultColor", "");
+    this.postMessage({ type: "defaultColor", color });
+  }
+
   private pushInitialState() {
     // Send the persisted scene snapshot first so the webview can hydrate
     // before any other state arrives. `null` means "no saved scene" — the
@@ -327,6 +360,7 @@ export class ScadWebviewPanel {
     // The webview is recreated on tab re-focus: restore the toggle state.
     this.postMessage({ type: "autoRender", ...this.session.autoRender });
     this.postParameterLabel();
+    this.postDefaultColor();
 
     // Send initial parameters
     const params = this.session.currentParameters;

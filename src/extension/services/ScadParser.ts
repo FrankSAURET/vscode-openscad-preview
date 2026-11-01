@@ -4,6 +4,7 @@ import {
   ScadParameter,
   StringParameter,
 } from "../../shared/types/ScadParameter";
+import { editorFromDeclaration, editorFromHint } from "./StringEditorRules";
 
 /** Group names (lower case) whose parameters are hidden from the Customizer. */
 const HIDDEN_GROUPS = new Set(["hidden", "masqué", "masque"]);
@@ -84,6 +85,17 @@ export class ScadParser {
 
       // The comment above wins over a trailing description.
       if (description) param.description = description;
+
+      // No hint and no choice list: guess the editor from value or name.
+      if (param.type === "string") {
+        const strParam = param as Partial<StringParameter>;
+        if (!strParam.editor && !strParam.options) {
+          Object.assign(
+            strParam,
+            editorFromDeclaration(decl.name, String(parsedVal.value)),
+          );
+        }
+      }
 
       params.push(param as ScadParameter);
     }
@@ -223,6 +235,11 @@ export class ScadParser {
         }
       } else if (param.type === "string") {
         const strParam = param as Partial<StringParameter>;
+        const hinted = editorFromHint(configStr);
+        if (hinted) {
+          Object.assign(strParam, hinted);
+          return;
+        }
         const options = this.parseChoices(
           configStr,
           "string",

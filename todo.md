@@ -1,6 +1,16 @@
 # À faire
 
-1. ✅ Tester l'aperçu en français sur un vrai fichier `.scad` (bulles, bouton Prévisualiser clic / Ctrl+clic, préréglage fixe).
+Rien en attente.
+
+# v2026.10.0.9
+
+1. ✅ Réglage `openscad.defaultColor` (`format: color-hex`, défaut `#EDEAE0`, vide = `--vscode-editor-foreground`). Message `defaultColor` → variable CSS `--scad-default-color` sur `body` ; `Preview` observe aussi l'attribut `style` et recalcule le thème (`additive`).
+2. ✅ Éditeurs de paramètres texte : type partagé `StringEditor` (`color` | `file` | `folder` | `font`), champs `editor` / `extensions` sur `StringParameter`.
+3. ✅ Détection par table `StringEditorRules.ts` : indice `// [color]`, `// [file:svg,dxf]`… (FR accepté), sinon valeur (`#hex`, extension importable), sinon nom de variable. Liste de choix prioritaire. Test `ScadParser` ajouté (5/5).
+4. ✅ Vue web : atomes `ColorField` (pastille `<input type=color>` + texte, noms CSS convertis en hex pour la pastille) et `PickField` (texte + bouton). Table `PICK_BUTTONS` dans `Parameters`.
+5. ✅ Extension : message `pickParameterValue`, table `PARAMETER_PICKERS` (`ParameterPickers.ts`) : `showOpenDialog` fichier/dossier (chemin relatif au .scad, `/`), police en deux `showQuickPick` (famille puis style, syntaxe `Famille:style=Bold`). Familles via `SystemFonts.ts` (PowerShell `InstalledFontCollection` sous Windows, `fc-list` ailleurs, cache).
+6. ✅ Icônes `file`, `folder`, `font` ajoutées au générateur.
+7. ⏳ README (anglais) : documenter les indices `// [color]`… avant publication.
 
 # v2026.10.0.8
 

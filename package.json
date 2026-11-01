@@ -4,7 +4,7 @@
   "description": "%extension.description%",
   "publisher": "electropol-fr",
   "version": "2026.10.0",
-  "buildNumber": 8,
+  "buildNumber": 9,
   "icon": "icon.png",
   "author": "Thijs Daniels, Frank SAURET",
   "license": "MIT",
@@ -113,6 +113,12 @@
           ],
           "default": "name",
           "description": "%config.parameterLabel%"
+        },
+        "openscad.defaultColor": {
+          "type": "string",
+          "format": "color-hex",
+          "default": "#EDEAE0",
+          "description": "%config.defaultColor%"
         }
       }
     },

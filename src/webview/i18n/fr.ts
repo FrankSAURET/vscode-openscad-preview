@@ -82,6 +82,14 @@ export const fr: Record<MessageKey, string> = {
   "parameters.checkbox.tip": "Cocher ou décocher pour basculer cette option.",
   "parameters.text.tip": "Taper le texte puis Entrée, ou quitter le champ, pour l'appliquer.",
   "parameters.select.tip": "Choisir une valeur dans la liste.",
+  "parameters.color.tip": "Ouvrir la palette de couleurs.",
+  "parameters.colorText.tip": "Couleur en #rrvvbb ou nom de couleur OpenSCAD (red, SteelBlue…). Entrée, ou quitter le champ, pour l'appliquer.",
+  "parameters.file": "Parcourir pour choisir un fichier",
+  "parameters.file.tip": "Parcourir : choisir le fichier (chemin enregistré relatif au fichier .scad).",
+  "parameters.folder": "Parcourir pour choisir un dossier",
+  "parameters.folder.tip": "Parcourir : choisir le dossier (chemin enregistré relatif au fichier .scad).",
+  "parameters.font": "Choisir une police",
+  "parameters.font.tip": "Choisir la police et son style parmi celles installées sur cet ordinateur.",
 
   // Champ numérique
   "numberField.tip": "Glisser à gauche ou à droite pour changer la valeur (Maj = fin). Cliquer pour saisir une valeur.",

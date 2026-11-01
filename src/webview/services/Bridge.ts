@@ -37,6 +37,10 @@ export class Bridge {
     vscode.postMessage({ type: "parameterChanged", name, value });
   }
 
+  public pickParameterValue(name: string) {
+    vscode.postMessage({ type: "pickParameterValue", name });
+  }
+
   public saveParameterSet(name: string) {
     vscode.postMessage({ type: "saveParameterSet", name });
   }

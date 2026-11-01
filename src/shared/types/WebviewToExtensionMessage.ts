@@ -7,6 +7,7 @@ export type WebviewToExtensionMessage =
       name: string;
       value: string | number | boolean | undefined;
     }
+  | { type: "pickParameterValue"; name: string }
   | { type: "saveParameterSet"; name: string }
   | { type: "promptSaveParameterSet" }
   | { type: "deleteParameterSet"; name: string }

@@ -1,15 +1,24 @@
 import { consume } from "@lit/context";
 import { css, html, LitElement, nothing } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { ScadParameter } from "../../../shared/types/ScadParameter";
+import {
+  ScadParameter,
+  StringParameter,
+} from "../../../shared/types/ScadParameter";
+import { StringEditor } from "../../../shared/types/StringEditor";
+import { ColorFieldChangeEvent } from "../atoms/ColorField";
+import { IconName } from "../atoms/Icon";
 import { NumberFieldChangeEvent } from "../atoms/NumberField";
+import { PickFieldChangeEvent } from "../atoms/PickField";
 import { ModelContext, modelContext } from "../../contexts/ModelContext";
 import {
   parameterContext,
   ParameterContext,
 } from "../../contexts/ParameterContext";
-import { t } from "../../i18n/t";
+import { MessageKey, t } from "../../i18n/t";
 import "../atoms/Collapsible";
+import "../atoms/ColorField";
+import "../atoms/PickField";
 import "../atoms/Icon";
 import "../atoms/IconButton";
 import "../atoms/Field";
@@ -322,6 +331,10 @@ export class Parameters extends LitElement {
       `;
     }
 
+    if (param.type === "string" && param.editor) {
+      return this.renderStringEditor(param, param.editor, String(currentValue));
+    }
+
     switch (param.type) {
       case "boolean":
         return html`
@@ -366,4 +379,56 @@ export class Parameters extends LitElement {
         return nothing;
     }
   }
+
+  private renderStringEditor(
+    param: StringParameter,
+    editor: StringEditor,
+    value: string,
+  ) {
+    if (editor === "color") {
+      return html`
+        <scad-color-field
+          .value=${value}
+          @change=${(e: ColorFieldChangeEvent) =>
+            this.handleInputChange(param.name, e.detail.value)}
+        ></scad-color-field>
+      `;
+    }
+
+    const button = PICK_BUTTONS[editor];
+    return html`
+      <scad-pick-field
+        .value=${value}
+        label=${t(button.label)}
+        tooltip=${t(button.tooltip)}
+        @change=${(e: PickFieldChangeEvent) =>
+          this.handleInputChange(param.name, e.detail.value)}
+        @pick=${() => this.parameterContext.pick(param.name)}
+      >
+        <scad-icon name=${button.icon}></scad-icon>
+      </scad-pick-field>
+    `;
+  }
 }
+
+/** Browse button of the editors whose box is opened by the extension. */
+const PICK_BUTTONS: Record<
+  Exclude<StringEditor, "color">,
+  { icon: IconName; label: MessageKey; tooltip: MessageKey }
+> = {
+  file: {
+    icon: "file",
+    label: "parameters.file",
+    tooltip: "parameters.file.tip",
+  },
+  folder: {
+    icon: "folder",
+    label: "parameters.folder",
+    tooltip: "parameters.folder.tip",
+  },
+  font: {
+    icon: "font",
+    label: "parameters.font",
+    tooltip: "parameters.font.tip",
+  },
+};

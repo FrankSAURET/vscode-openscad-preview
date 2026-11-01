@@ -12,6 +12,9 @@
 
 - Onglet Paramètres : bouton « Libellé depuis la description » (à côté du préréglage) et réglage `openscad.parameterLabel`. Activé, chaque champ affiche le commentaire écrit au-dessus de sa variable, accents compris, au lieu du nom de la variable. Sans commentaire, le nom reste affiché. Le choix est mémorisé.
 
+- Onglet Paramètres : éditeur adapté pour les paramètres texte. Couleur : pastille qui ouvre la palette, à côté du texte (`#rrvvbb` ou nom OpenSCAD). Fichier ou dossier : bouton Parcourir, chemin enregistré relatif au fichier `.scad`. Police : choix de la police installée puis de son style (Normal, Bold, Italic, Bold Italic). L'éditeur se choisit par un indice en fin de ligne — `// [color]`, `// [file]`, `// [file:svg,dxf]`, `// [folder]`, `// [font]` (ou `couleur`, `fichier`, `dossier`, `police`) — ou se devine : valeur `#ff8800` ou `logo.svg`, nom de variable contenant `color`/`couleur`, `font`/`police`, `file`/`fichier`/`path`/`chemin`, `folder`/`dossier`/`dir`.
+- Réglage `openscad.defaultColor` : couleur du modèle là où le code ne fixe aucune `color()`. Blanc cassé par défaut ; vide, la couleur du texte de l'éditeur (ancien comportement).
+
 ### Modification
 
 - Toutes les icônes de l'aperçu passent en couleur avec un effet de relief (dégradé, reflet, ombre portée) : outils, options, onglets, scène, préréglages, sortie, bouton d'ouverture de l'aperçu. Les cubes de rendu, d'accrochage, de coupe et de caméra sont dessinés en 3D isométrique. Les icônes de lumière prennent la couleur de la lumière dans la vue 3D. Formes issues des jeux libres Fluent UI System Icons et Codicons (Microsoft, licence MIT). Enregistrer et Déplacer gardent leur dessin habituel, en couleur.

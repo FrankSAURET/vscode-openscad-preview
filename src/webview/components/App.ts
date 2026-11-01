@@ -127,6 +127,9 @@ export class App extends LitElement {
     revert: (name) => {
       bridge.updateParameterOverride(name, undefined);
     },
+    pick: (name) => {
+      bridge.pickParameterValue(name);
+    },
     saveSet: (name) => {
       bridge.saveParameterSet(name);
     },
@@ -426,6 +429,10 @@ export class App extends LitElement {
           ...this.parameterContext,
           labelMode: message.mode,
         };
+        break;
+      case "defaultColor":
+        // Read back by the preview theme; the body style change triggers it.
+        document.body.style.setProperty("--scad-default-color", message.color);
         break;
       case "loadingState":
         this.logController.processLoadingState(message.loading);

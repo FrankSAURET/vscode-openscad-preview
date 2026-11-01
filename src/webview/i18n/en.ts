@@ -83,6 +83,14 @@ export const en = {
   "parameters.checkbox.tip": "Check or uncheck to switch this option.",
   "parameters.text.tip": "Type the text then press Enter or leave the field to apply it.",
   "parameters.select.tip": "Choose a value in the list.",
+  "parameters.color.tip": "Open the colour palette.",
+  "parameters.colorText.tip": "Colour as #rrggbb or an OpenSCAD colour name (red, SteelBlue…). Press Enter or leave the field to apply it.",
+  "parameters.file": "Browse for a file",
+  "parameters.file.tip": "Browse: choose the file (path stored relative to the .scad file).",
+  "parameters.folder": "Browse for a folder",
+  "parameters.folder.tip": "Browse: choose the folder (path stored relative to the .scad file).",
+  "parameters.font": "Choose a font",
+  "parameters.font.tip": "Choose the font and its style among the fonts installed on this computer.",
 
   // Number field
   "numberField.tip": "Drag left or right to change the value (Shift = fine). Click to type a value.",
