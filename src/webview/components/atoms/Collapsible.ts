@@ -74,5 +74,14 @@ export class ScadCollapsible extends LitElement {
 
   toggle() {
     this.open = !this.open;
+    this.dispatchEvent(new CollapsibleToggleEvent(this.open));
+  }
+}
+
+/** Fired when the user opens or closes the section by its header. */
+export class CollapsibleToggleEvent extends CustomEvent<{ open: boolean }> {
+  static readonly eventName = "toggle" as const;
+  constructor(open: boolean) {
+    super(CollapsibleToggleEvent.eventName, { detail: { open }, bubbles: true, composed: true });
   }
 }

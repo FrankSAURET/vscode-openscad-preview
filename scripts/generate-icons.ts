@@ -55,6 +55,9 @@ const filled: Record<string, { fluent: string; palette: PaletteName }> = {
   error: { fluent: "error_circle", palette: "red" },
   folder: { fluent: "folder_open", palette: "orange" },
   font: { fluent: "text_font", palette: "purple" },
+  accordion: { fluent: "list_bar_tree", palette: "blue" },
+  "expand-all": { fluent: "arrow_expand_all", palette: "green" },
+  "collapse-all": { fluent: "arrow_collapse_all", palette: "orange" },
 };
 
 const codicons: Record<string, { codicon: string; palette: PaletteName }> = {

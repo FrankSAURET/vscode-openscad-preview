@@ -2,6 +2,14 @@
 
 Rien en attente.
 
+# v2026.10.0.10
+
+1. ✅ Onglet Paramètres : boutons Accordéon (bascule), Tout déplier, Tout replier dans la barre du préréglage, après un séparateur. Barre qui passe à la ligne quand le panneau est étroit.
+2. ✅ État `groupLayout` dans `Parameters` : `free` (ensemble des groupes repliés) ou `accordion` (groupe ouvert unique). Quitter l'accordéon garde le groupe ouvert.
+3. ✅ `Collapsible` émet `CollapsibleToggleEvent` au clic sur l'en-tête ; les groupes sont pilotés par `.open`.
+4. ✅ Icônes `accordion`, `expand-all`, `collapse-all` (Fluent filled).
+5. ℹ️ Mode et état non mémorisés : la vue web recréée repart tout déplié.
+
 # v2026.10.0.9
 
 1. ✅ Réglage `openscad.defaultColor` (`format: color-hex`, défaut `#EDEAE0`, vide = `--vscode-editor-foreground`). Message `defaultColor` → variable CSS `--scad-default-color` sur `body` ; `Preview` observe aussi l'attribut `style` et recalcule le thème (`additive`).

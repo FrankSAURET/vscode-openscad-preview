@@ -14,6 +14,7 @@
 
 - Onglet Paramètres : éditeur adapté pour les paramètres texte. Couleur : pastille qui ouvre la palette, à côté du texte (`#rrvvbb` ou nom OpenSCAD). Fichier ou dossier : bouton Parcourir, chemin enregistré relatif au fichier `.scad`. Police : choix de la police installée puis de son style (Normal, Bold, Italic, Bold Italic). L'éditeur se choisit par un indice en fin de ligne — `// [color]`, `// [file]`, `// [file:svg,dxf]`, `// [folder]`, `// [font]` (ou `couleur`, `fichier`, `dossier`, `police`) — ou se devine : valeur `#ff8800` ou `logo.svg`, nom de variable contenant `color`/`couleur`, `font`/`police`, `file`/`fichier`/`path`/`chemin`, `folder`/`dossier`/`dir`.
 - Réglage `openscad.defaultColor` : couleur du modèle là où le code ne fixe aucune `color()`. Blanc cassé par défaut ; vide, la couleur du texte de l'éditeur (ancien comportement).
+- Onglet Paramètres : trois boutons à côté du préréglage pour les groupes. « Accordéon » replie tout, puis un seul groupe reste ouvert à la fois ; un nouveau clic quitte ce mode. « Tout déplier » et « Tout replier » partent de tout ouvert ou tout fermé, puis chaque groupe s'ouvre et se ferme librement.
 
 ### Modification
 
