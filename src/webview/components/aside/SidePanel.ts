@@ -1,6 +1,9 @@
 import { css, html, LitElement, nothing } from "lit";
 import { customElement, state } from "lit/decorators.js";
 import { MessageKey, t } from "../../i18n/t";
+import type { IconName } from "../atoms/Icon";
+import "../atoms/Icon";
+import "../atoms/IconButton";
 import "./Environment";
 import "./ObjectProperties";
 import "./Parameters";
@@ -14,7 +17,7 @@ declare global {
 
 interface Tab {
   id: string;
-  icon: string;
+  icon: IconName;
   label: MessageKey;
   tip: MessageKey;
 }
@@ -28,7 +31,7 @@ const tabs: Tab[] = [
   },
   {
     id: "properties",
-    icon: "symbol-misc",
+    icon: "scene",
     label: "tab.properties",
     tip: "tab.properties.tip",
   },
@@ -117,17 +120,18 @@ export class SidePanel extends LitElement {
           <div class="tab-strip">
             ${tabs.map(
               (tab) => html`
-                <vscode-toolbar-button
-                  icon=${tab.icon}
+                <scad-icon-button
                   label=${t(tab.label)}
-                  title=${t(tab.tip)}
+                  tooltip=${t(tab.tip)}
                   toggleable
                   .checked=${tab == this.activeTab}
                   @change=${() => {
                     this.activeTab = tab;
                     this.requestUpdate();
                   }}
-                ></vscode-toolbar-button>
+                >
+                  <scad-icon name=${tab.icon}></scad-icon>
+                </scad-icon-button>
               `,
             )}
           </div>

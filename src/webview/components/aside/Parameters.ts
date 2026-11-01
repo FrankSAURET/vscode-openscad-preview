@@ -10,6 +10,8 @@ import {
 } from "../../contexts/ParameterContext";
 import { t } from "../../i18n/t";
 import "../atoms/Collapsible";
+import "../atoms/Icon";
+import "../atoms/IconButton";
 import "../atoms/Field";
 import "../atoms/NumberField";
 
@@ -123,38 +125,42 @@ export class Parameters extends LitElement {
           <div class="preset-actions">
             ${activeSetName
               ? html`
-                  <vscode-toolbar-button
-                    icon="save"
+                  <scad-icon-button
                     label=${t("parameters.saveActive")}
-                    title=${t("parameters.saveActive.tip")}
+                    tooltip=${t("parameters.saveActive.tip")}
                     @click=${() => this.parameterContext.saveSet(activeSetName)}
-                  ></vscode-toolbar-button>
-                  <vscode-toolbar-button
-                    icon="trash"
+                  >
+                    <scad-icon name="save"></scad-icon>
+                  </scad-icon-button>
+                  <scad-icon-button
                     label=${t("parameters.deleteActive")}
-                    title=${t("parameters.deleteActive.tip")}
+                    tooltip=${t("parameters.deleteActive.tip")}
                     @click=${() =>
                       this.parameterContext.deleteSet(activeSetName)}
-                  ></vscode-toolbar-button>
+                  >
+                    <scad-icon name="trash"></scad-icon>
+                  </scad-icon-button>
                 `
               : nothing}
-            <vscode-toolbar-button
-              icon="save-as"
+            <scad-icon-button
               label=${t("parameters.saveAsNew")}
-              title=${t("parameters.saveAsNew.tip")}
+              tooltip=${t("parameters.saveAsNew.tip")}
               @click=${() => this.parameterContext.saveAsNewSet()}
-            ></vscode-toolbar-button>
-            <vscode-toolbar-button
-              icon="comment"
+            >
+              <scad-icon name="save-as"></scad-icon>
+            </scad-icon-button>
+            <scad-icon-button
               label=${t("parameters.labelDescription")}
-              title=${t("parameters.labelDescription.tip")}
+              tooltip=${t("parameters.labelDescription.tip")}
               toggleable
               .checked=${labelMode === "description"}
               @change=${() =>
                 this.parameterContext.setLabelMode(
                   labelMode === "description" ? "name" : "description",
                 )}
-            ></vscode-toolbar-button>
+            >
+              <scad-icon name="comment"></scad-icon>
+            </scad-icon-button>
           </div>
         </div>
       </scad-collapsible>
@@ -180,14 +186,15 @@ export class Parameters extends LitElement {
                   >
                     ${isOverridden
                       ? html`
-                          <vscode-toolbar-button
+                          <scad-icon-button
                             slot="actions"
-                            icon="discard"
                             label=${t("parameters.revert")}
-                            title=${t("parameters.revert.tip")}
+                            tooltip=${t("parameters.revert.tip")}
                             @click=${() =>
                               this.handleInputChange(parameter.name, undefined)}
-                          ></vscode-toolbar-button>
+                          >
+                            <scad-icon name="discard"></scad-icon>
+                          </scad-icon-button>
                         `
                       : nothing}
                     ${this.renderInput(parameter, currentValue)}

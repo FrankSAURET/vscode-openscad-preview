@@ -1,6 +1,15 @@
 # À faire
 
-1. ⬜ Tester l'aperçu en français sur un vrai fichier `.scad` (bulles, bouton Prévisualiser clic / Ctrl+clic, préréglage fixe).
+1. ✅ Tester l'aperçu en français sur un vrai fichier `.scad` (bulles, bouton Prévisualiser clic / Ctrl+clic, préréglage fixe).
+
+# v2026.10.0.6
+
+1. ✅ Icônes couleur à relief : `atoms/icons/` (`iconPalette.ts`, `drawnIcons.ts` isométriques, `fluentIcons.generated.ts`), `Icon.ts` les rend via `unsafeSVG` + ombre portée.
+2. ✅ Générateur `scripts/generate-icons.ts` (`npm run icons`) : Fluent « color » tel quel, Fluent « filled » + dégradé de palette + reflet ; écrit aussi `media/preview.svg` (bouton du titre d'éditeur). Dépendance de développement `@fluentui/svg-icons` (MIT).
+3. ✅ Plus aucun codicon dans la vue web : `vscode-toolbar-button` / `vscode-icon` remplacés par `scad-icon-button` + `scad-icon` ; `IconButton` gagne `disabled` et désature l'icône en état verrouillé.
+4. ✅ Lumières : teinte par variable CSS `--icon-tint` (jaune par défaut, couleur de la lumière dans la vue 3D, `LightRig`).
+5. ✅ Œil barré (`eye-off`) pour un objet masqué.
+6. ✅ Planche de contrôle : `npx tsx scripts/icon-sheet.ts <sortie.html>`.
 
 # v2026.10.0.5
 
