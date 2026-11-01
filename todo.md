@@ -2,6 +2,12 @@
 
 1. ✅ Tester l'aperçu en français sur un vrai fichier `.scad` (bulles, bouton Prévisualiser clic / Ctrl+clic, préréglage fixe).
 
+# v2026.10.0.8
+
+1. ✅ Icône Enregistrer : retour au dessin codicon `save`, peint en dégradé bleu + reflet (table `codicons` du générateur, source `@vscode/codicons/src/icons`).
+2. ✅ Outil Déplacer : retour à l'ancienne quadruple flèche, en vert à reflet (`glossyPath` dans `drawnIcons.ts`).
+3. ℹ️ Les fichiers de ces deux icônes sont partis dans l'enregistrement `dd5d97f` d'une session parallèle.
+
 # v2026.10.0.7
 
 1. ✅ Moteur de calcul : réglage `openscad.renderBackend` (`auto` | `manifold` | `cgal`). `auto` sonde `openscad --help` une fois par exécutable (`--backend` présent → Manifold), sinon CGAL + message dans la sortie.

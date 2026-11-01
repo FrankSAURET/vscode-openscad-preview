@@ -14,7 +14,7 @@
 
 ### Modification
 
-- Toutes les icônes de l'aperçu passent en couleur avec un effet de relief (dégradé, reflet, ombre portée) : outils, options, onglets, scène, préréglages, sortie, bouton d'ouverture de l'aperçu. Les cubes de rendu, d'accrochage, de coupe et de caméra sont dessinés en 3D isométrique. Les icônes de lumière prennent la couleur de la lumière dans la vue 3D. Formes issues du jeu libre Fluent UI System Icons (Microsoft, licence MIT).
+- Toutes les icônes de l'aperçu passent en couleur avec un effet de relief (dégradé, reflet, ombre portée) : outils, options, onglets, scène, préréglages, sortie, bouton d'ouverture de l'aperçu. Les cubes de rendu, d'accrochage, de coupe et de caméra sont dessinés en 3D isométrique. Les icônes de lumière prennent la couleur de la lumière dans la vue 3D. Formes issues des jeux libres Fluent UI System Icons et Codicons (Microsoft, licence MIT). Enregistrer et Déplacer gardent leur dessin habituel, en couleur.
 - Arbre de scène : l'œil se barre quand un objet est masqué.
 - Onglet Paramètres : la zone « Préréglage » (choix, enregistrement, suppression) reste toujours visible en haut ; seuls les groupes de paramètres défilent.
 - Fork publié sous l'identifiant `electropol-fr.openscad-preview-fr`, numéroté en calver.
