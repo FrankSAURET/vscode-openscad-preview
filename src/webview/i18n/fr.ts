@@ -22,7 +22,7 @@ export const fr: Record<MessageKey, string> = {
 
   // Options d'affichage
   "options.autoRender": "Prévisualiser",
-  "options.autoRender.tip": "Prévisualiser : un clic calcule le modèle maintenant. Ctrl+clic fige l'aperçu automatique (bouton grisé) : le modèle est alors recalculé à chaque enregistrement ou changement de paramètre. Ctrl+clic à nouveau pour le libérer.",
+  "options.autoRender.tip": "Prévisualiser : un clic calcule le modèle maintenant. Ctrl+clic fige l'aperçu automatique (bouton grisé) : le modèle est alors recalculé à chaque enregistrement ou changement de paramètre. Ctrl+clic à nouveau pour le libérer. Figé par défaut.",
   "options.camera": "Changer de caméra",
   "options.camera.tip": "Changer de caméra : choisir la caméra de la scène utilisée pour la vue 3D.",
   "options.perspective": "Perspective",

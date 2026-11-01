@@ -47,9 +47,9 @@ export class ScadSession {
   }>();
   public readonly onAutoRenderChanged = this._onAutoRenderChanged.event;
 
-  // When off (default), file and parameter changes are queued until the user
-  // asks for a render; when latched on, every change is rendered at once.
-  private _autoRender = false;
+  // When latched on (default), every change is rendered at once; when off,
+  // file and parameter changes are queued until the user asks for a render.
+  private _autoRender = true;
   private renderPending = false;
   // The first render (at launch) always happens, whatever the mode.
   private hasRendered = false;

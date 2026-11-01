@@ -2,6 +2,11 @@
 
 Rien en attente.
 
+# v2026.10.0.12
+
+1. ✅ Aperçu automatique figé par défaut (`ScadSession._autoRender = true`, état initial de la vue web aligné) ; bulle du bouton Prévisualiser complétée.
+2. ℹ️ Pas mémorisé : chaque ouverture d'aperçu repart figé.
+
 # v2026.10.0.11
 
 1. ✅ Boutons Accordéon / Tout déplier / Tout replier déplacés dans l'en-tête « Paramètres » du panneau latéral (au-dessus du préréglage), avant les onglets, séparateur à droite.

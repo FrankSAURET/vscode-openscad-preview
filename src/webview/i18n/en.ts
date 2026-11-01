@@ -23,7 +23,7 @@ export const en = {
 
   // View options
   "options.autoRender": "Preview",
-  "options.autoRender.tip": "Preview: click to render the model now. Ctrl+click to lock automatic preview (button greyed): the model is then re-rendered on every save or parameter change. Ctrl+click again to unlock.",
+  "options.autoRender.tip": "Preview: click to render the model now. Ctrl+click to lock automatic preview (button greyed): the model is then re-rendered on every save or parameter change. Ctrl+click again to unlock. Locked by default.",
   "options.camera": "Switch camera",
   "options.camera.tip": "Switch camera: choose which scene camera is used for the 3D view.",
   "options.perspective": "Perspective",

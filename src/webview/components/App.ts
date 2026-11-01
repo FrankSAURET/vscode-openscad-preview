@@ -151,7 +151,7 @@ export class App extends LitElement {
     base64Data: null,
     isLoading: true,
     loadingMessage: t("preview.rendering"),
-    autoRender: false,
+    autoRender: true,
     renderPending: false,
     export: bridge.exportModel,
     sendToSlicer: bridge.sendToSlicer,
