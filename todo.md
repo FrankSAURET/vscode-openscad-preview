@@ -1,5 +1,10 @@
 # À faire
 
+# v2026.10.0.17
+
+1. ✅ Bouton Réglages : identifiant de l'extension lu à l'exécution (`extensions.all`, comparaison sur `extensionUri`) au lieu de `@ext:electropol-fr.openscad-preview-fr` écrit en dur. Marche aussi dans l'original.
+2. ✅ Deux PR sur l'original thijsdaniels : #64 (travail du 01/11 sans les icônes, branche `feat/scene-tools-params`, posée sur #63) et #65 (icônes couleur seules, branche `feat/color-icons`, posée sur #64). Dans #64, icônes de l'original gardées (codicons + SVG monochromes) ; ajout de `model-part` et `explode` monochromes dans `Icon.ts`.
+
 # v2026.10.0.16
 
 1. ✅ Réglage `openscad.enableLazyUnion` supprimé (package.json, nls EN/FR). Remplacé par un bouton bascule « Éclater » dans l'en-tête de l'arbre Scène (icône `explode` : trois cubes orange écartés).

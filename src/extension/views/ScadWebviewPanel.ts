@@ -7,6 +7,7 @@ import {
   WebviewPanel,
   commands,
   env,
+  extensions,
   l10n,
   window,
   workspace,
@@ -118,7 +119,12 @@ export class ScadWebviewPanel {
             // Settings editor filtered on this extension's own settings.
             commands.executeCommand(
               "workbench.action.openSettings",
-              "@ext:electropol-fr.openscad-preview-fr",
+              `@ext:${
+                extensions.all.find(
+                  (ext) =>
+                    ext.extensionUri.toString() === this.extensionUri.toString(),
+                )?.id ?? ""
+              }`,
             );
             return;
           case "setParameterLabel":
