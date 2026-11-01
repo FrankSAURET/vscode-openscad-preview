@@ -26,11 +26,14 @@
 - Arbre de scène : l'œil se barre quand un objet est masqué.
 - Onglet Paramètres : la zone « Préréglage » (choix, enregistrement, suppression) reste toujours visible en haut ; seuls les groupes de paramètres défilent.
 - Fork publié sous l'identifiant `electropol-fr.openscad-preview-fr`, numéroté en calver.
+- Outil Mesurer : chaque extrémité de la mesure est une flèche de cote qui pointe sur le point mesuré, à la place du point rond. Pendant la visée, un anneau montre où le point va se poser.
+- Outil Mesurer : Échap quitte l'outil (retour à Sélection), comme les autres outils.
 
 ### Correction
 
 - La description d'un paramètre est lue dans le commentaire `// …` placé juste au-dessus de sa variable, comme dans le Customizer d'OpenSCAD. Ce commentaire l'emporte sur celui de fin de ligne, qui reste utilisé à défaut.
 - Le groupe `/* [Masqué] */` (ou `Masque`) cache ses paramètres, comme `/* [Hidden] */`.
+- Outil Mesurer : l'accroche Sommet ou Arête colle toujours le point au coin ou à l'arête réelle la plus proche, quelle que soit la distance au curseur. Les diagonales invisibles qui découpent les faces planes en triangles ne servent plus d'arêtes. Une pièce masquée ou une zone retirée par un plan de coupe ne capte plus le point.
 
 ## 0.7.0
 

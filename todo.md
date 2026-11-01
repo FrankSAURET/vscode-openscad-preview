@@ -1,6 +1,12 @@
 # À faire
 
-- Modifie l'outilde mesure pour qu'il affiche des fleches à la place des points et adhère réellement aux arrêtes ou sommets de l'objet. Echappe doit le déselectionner.
+# v2026.10.0.15
+
+1. ✅ Mesure : extrémités en flèches de cote. Widget `widgets/MeasureArrow.ts` (CSS2D, SVG tourné dans `onBeforeRender` d'après la projection des deux points, rapport d'aspect tiré de la caméra), partagé par `MeasurementRig` et l'aperçu de `MeasureTool`. Anneau creux pour le point survolé.
+2. ✅ Accroche réelle : plus de seuil de 20 px, le point colle toujours au sommet / à l'arête le plus proche. Candidats = arêtes vives (`tools/MeshFeatures.ts`, `EdgesGeometry` à 0,5°, cache par géométrie) : diagonales des faces planes exclues. Recherche en espace local du maillage.
+3. ✅ Lancer de rayon de la mesure : ignore les pièces masquées et les zones coupées (`isClippedAway` sorti de `Stage` dans `preview/isClippedAway.ts`, partagé).
+4. ✅ Échap (hors champ de saisie) : retour à l'outil Sélection, quel que soit l'outil actif (`App.handleKeyDown`). Bulle Mesurer complétée FR/EN.
+5. ✅ Test hors navigateur : cube → 12 arêtes, 8 sommets ; cylindre $fn=100 → 300 arêtes.
 
 # v2026.10.0.14
 

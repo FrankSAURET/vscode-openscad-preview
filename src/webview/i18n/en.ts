@@ -15,7 +15,7 @@ export const en = {
   "tool.scale": "Scale",
   "tool.scale.tip": "Scale: drag the handles of the selected object to resize it.",
   "tool.measure": "Measure",
-  "tool.measure.tip": "Measure: click two points on the model to measure the distance between them. Hover to choose what the points snap to.",
+  "tool.measure.tip": "Measure: click two points on the model to measure the distance between them. Hover to choose what the points snap to. Escape leaves the tool.",
   "tool.measure.vertex": "Vertex",
   "tool.measure.vertex.tip": "Snap to vertices: measurement points stick to the nearest corner of the model.",
   "tool.measure.edge": "Edge",

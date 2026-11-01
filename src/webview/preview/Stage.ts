@@ -3,7 +3,6 @@ import {
   Color,
   FogExp2,
   Group,
-  Intersection,
   Mesh,
   MeshStandardMaterial,
   Object3D,
@@ -34,6 +33,7 @@ import {
   RenderMode,
   ViewOptionsContext,
 } from "../contexts/ViewOptionsContext";
+import { isClippedAway } from "./isClippedAway";
 import { XRayPass } from "./passes/XRayPass";
 import { AmbientLightRig } from "./rigs/AmbientLightRig";
 import { CameraRig } from "./rigs/CameraRig";
@@ -851,16 +851,4 @@ export class Stage {
     );
   };
 
-}
-
-/** True when the hit point lies in a region removed by the material's clipping planes. */
-function isClippedAway(hit: Intersection): boolean {
-  if (!(hit.object instanceof Mesh)) return false;
-  const material = hit.object.material;
-  const materials = Array.isArray(material) ? material : [material];
-  return materials.some((mat) =>
-    mat.clippingPlanes?.some(
-      (plane: Plane) => plane.distanceToPoint(hit.point) < 0,
-    ),
-  );
 }

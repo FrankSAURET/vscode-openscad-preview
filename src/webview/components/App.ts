@@ -295,8 +295,18 @@ export class App extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this.unsubscribe = bridge.onMessage(this.handleMessage);
+    window.addEventListener("keydown", this.handleKeyDown);
     bridge.ready();
   }
+
+  /** Escape drops the active tool (measure, move…) back to Select. */
+  private handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key !== "Escape" || e.defaultPrevented) return;
+    const target = e.composedPath()[0];
+    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || target instanceof HTMLSelectElement) return;
+    if (this.activeToolContextValue.activeTool === ActiveTool.Select) return;
+    this.activeToolContextValue.setActiveTool(ActiveTool.Select);
+  };
 
   private schedulePersist() {
     if (this.persistTimer !== null) {
@@ -434,6 +444,7 @@ export class App extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.unsubscribe?.();
+    window.removeEventListener("keydown", this.handleKeyDown);
   }
 
   private handleMessage = (message: ExtensionToWebviewMessage) => {

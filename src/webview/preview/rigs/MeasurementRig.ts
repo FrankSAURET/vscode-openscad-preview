@@ -7,6 +7,7 @@ import {
   MeasurementProperties,
   ObjectProperties,
 } from "../../contexts/SelectedObjectContext";
+import { MeasureArrow } from "../widgets/MeasureArrow";
 import { Rig } from "./Rig";
 
 const LINE_WIDTH = 2;
@@ -18,8 +19,8 @@ export class MeasurementRig extends Rig {
   private pointA: Vector3;
   private pointB: Vector3;
   private line: Line2;
-  private markerA: CSS2DObject;
-  private markerB: CSS2DObject;
+  private markerA: MeasureArrow;
+  private markerB: MeasureArrow;
   private distanceLabel: CSS2DObject;
   private _visible = true;
   private colorHex: string;
@@ -56,9 +57,9 @@ export class MeasurementRig extends Rig {
     this.line.renderOrder = 1000;
     this.group.add(this.line);
 
-    // CSS2D endpoint markers and distance label
-    this.markerA = this.createMarker();
-    this.markerB = this.createMarker();
+    // CSS2D endpoint arrows and distance label
+    this.markerA = new MeasureArrow(this.colorHex);
+    this.markerB = new MeasureArrow(this.colorHex);
     this.distanceLabel = this.createDistanceLabel();
     this.group.add(this.markerA);
     this.group.add(this.markerB);
@@ -70,19 +71,6 @@ export class MeasurementRig extends Rig {
   /** Update LineMaterial resolution when the canvas resizes. */
   public setResolution(size: Vector2): void {
     (this.line.material as LineMaterial).resolution.copy(size);
-  }
-
-  private createMarker(): CSS2DObject {
-    const el = document.createElement("div");
-    el.style.cssText = `
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: ${this.colorHex};
-      transform: translate(-50%, -50%);
-      pointer-events: none;
-    `;
-    return new CSS2DObject(el);
   }
 
   private createDistanceLabel(): CSS2DObject {
@@ -114,8 +102,8 @@ export class MeasurementRig extends Rig {
     ]);
     this.line.computeLineDistances();
 
-    this.markerA.position.copy(this.pointA);
-    this.markerB.position.copy(this.pointB);
+    this.markerA.set(this.pointA, this.pointB);
+    this.markerB.set(this.pointB, this.pointA);
     this.distanceLabel.position.copy(mid);
 
     const dx = this.pointB.x - this.pointA.x;

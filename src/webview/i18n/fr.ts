@@ -14,7 +14,7 @@ export const fr: Record<MessageKey, string> = {
   "tool.scale": "Redimensionner",
   "tool.scale.tip": "Redimensionner : tirer les poignées de l'objet sélectionné pour changer sa taille.",
   "tool.measure": "Mesurer",
-  "tool.measure.tip": "Mesurer : cliquer deux points du modèle pour mesurer leur distance. Survoler pour choisir l'accroche des points.",
+  "tool.measure.tip": "Mesurer : cliquer deux points du modèle pour mesurer leur distance. Survoler pour choisir l'accroche des points. Échap quitte l'outil.",
   "tool.measure.vertex": "Sommet",
   "tool.measure.vertex.tip": "Accroche aux sommets : les points de mesure se collent au coin le plus proche du modèle.",
   "tool.measure.edge": "Arête",
