@@ -16,6 +16,12 @@ import {
   ParameterContext,
 } from "../../contexts/ParameterContext";
 import { MessageKey, t } from "../../i18n/t";
+import {
+  expandedLayout,
+  GroupLayout,
+  isGroupOpen,
+  toggleGroup,
+} from "../../services/GroupLayout";
 import { CollapsibleToggleEvent } from "../atoms/Collapsible";
 import "../atoms/Collapsible";
 import "../atoms/ColorField";
@@ -74,12 +80,6 @@ export class Parameters extends LitElement {
       align-items: center;
     }
 
-    .separator {
-      width: 1px;
-      height: 16px;
-      background: var(--vscode-panel-border);
-    }
-
     vscode-textfield {
       width: 100%;
     }
@@ -119,45 +119,9 @@ export class Parameters extends LitElement {
   @state()
   private parameterContext!: ParameterContext;
 
-  /**
-   * Free: every group opens and closes on its own (all open by default).
-   * Accordion: at most one group open at a time.
-   */
-  @state()
-  private groupLayout: GroupLayout = { mode: "free", collapsed: new Set() };
-
-  private isGroupOpen(group: string): boolean {
-    const layout = this.groupLayout;
-    return layout.mode === "accordion"
-      ? layout.open === group
-      : !layout.collapsed.has(group);
-  }
-
-  private toggleGroup(group: string, open: boolean) {
-    const layout = this.groupLayout;
-    if (layout.mode === "accordion") {
-      this.groupLayout = { mode: "accordion", open: open ? group : undefined };
-      return;
-    }
-    const collapsed = new Set(layout.collapsed);
-    if (open) collapsed.delete(group);
-    else collapsed.add(group);
-    this.groupLayout = { mode: "free", collapsed };
-  }
-
-  /** Accordion starts all closed; leaving it keeps what is open. */
-  private toggleAccordion(groups: Map<string, ScadParameter[]>) {
-    const layout = this.groupLayout;
-    this.groupLayout =
-      layout.mode === "accordion"
-        ? {
-            mode: "free",
-            collapsed: new Set(
-              [...groups.keys()].filter((group) => group !== layout.open),
-            ),
-          }
-        : { mode: "accordion", open: undefined };
-  }
+  /** Owned by the side panel, whose header holds the layout buttons. */
+  @property({ attribute: false })
+  public groupLayout: GroupLayout = expandedLayout();
 
   public render() {
     const { parameters, overrides, parameterSets, activeSetName, labelMode } =
@@ -224,35 +188,6 @@ export class Parameters extends LitElement {
             >
               <scad-icon name="comment"></scad-icon>
             </scad-icon-button>
-            <span class="separator"></span>
-            <scad-icon-button
-              label=${t("parameters.accordion")}
-              tooltip=${t("parameters.accordion.tip")}
-              toggleable
-              .checked=${this.groupLayout.mode === "accordion"}
-              @change=${() => this.toggleAccordion(groups)}
-            >
-              <scad-icon name="accordion"></scad-icon>
-            </scad-icon-button>
-            <scad-icon-button
-              label=${t("parameters.expandAll")}
-              tooltip=${t("parameters.expandAll.tip")}
-              @click=${() =>
-                (this.groupLayout = { mode: "free", collapsed: new Set() })}
-            >
-              <scad-icon name="expand-all"></scad-icon>
-            </scad-icon-button>
-            <scad-icon-button
-              label=${t("parameters.collapseAll")}
-              tooltip=${t("parameters.collapseAll.tip")}
-              @click=${() =>
-                (this.groupLayout = {
-                  mode: "free",
-                  collapsed: new Set(groups.keys()),
-                })}
-            >
-              <scad-icon name="collapse-all"></scad-icon>
-            </scad-icon-button>
           </div>
         </div>
       </scad-collapsible>
@@ -261,9 +196,13 @@ export class Parameters extends LitElement {
           ([groupName, parameters]) => html`
             <scad-collapsible
               heading="${groupName}"
-              .open=${this.isGroupOpen(groupName)}
+              .open=${isGroupOpen(this.groupLayout, groupName)}
               @toggle=${(e: CollapsibleToggleEvent) =>
-                this.toggleGroup(groupName, e.detail.open)}
+                this.dispatchEvent(
+                  new GroupLayoutChangeEvent(
+                    toggleGroup(this.groupLayout, groupName, e.detail.open),
+                  ),
+                )}
             >
               ${parameters.map((parameter) => {
                 const isOverridden = parameter.name in overrides;
@@ -499,9 +438,13 @@ export class Parameters extends LitElement {
   }
 }
 
-type GroupLayout =
-  | { mode: "free"; collapsed: Set<string> }
-  | { mode: "accordion"; open: string | undefined };
+/** A group was opened or closed by the user; the owner stores the layout. */
+export class GroupLayoutChangeEvent extends CustomEvent<{ layout: GroupLayout }> {
+  static readonly eventName = "group-layout-change" as const;
+  constructor(layout: GroupLayout) {
+    super(GroupLayoutChangeEvent.eventName, { detail: { layout }, bubbles: true, composed: true });
+  }
+}
 
 /** Browse button of the editors whose box is opened by the extension. */
 const PICK_BUTTONS: Record<

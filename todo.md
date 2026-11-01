@@ -2,6 +2,11 @@
 
 Rien en attente.
 
+# v2026.10.0.11
+
+1. ✅ Boutons Accordéon / Tout déplier / Tout replier déplacés dans l'en-tête « Paramètres » du panneau latéral (au-dessus du préréglage), avant les onglets, séparateur à droite.
+2. ✅ État remonté dans `SidePanel` (survit au changement d'onglet), logique pure dans `services/GroupLayout.ts` (`free` = ouverture par défaut + groupes inversés, `accordion`). `Parameters` reçoit `.groupLayout` et émet `GroupLayoutChangeEvent`.
+
 # v2026.10.0.10
 
 1. ✅ Onglet Paramètres : boutons Accordéon (bascule), Tout déplier, Tout replier dans la barre du préréglage, après un séparateur. Barre qui passe à la ligne quand le panneau est étroit.
