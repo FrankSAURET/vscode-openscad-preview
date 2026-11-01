@@ -7,3 +7,6 @@ node_modules
 # Build Artifacts
 dist
 *.vsix
+
+#VsCode
+.vscode
