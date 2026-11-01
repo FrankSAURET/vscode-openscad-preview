@@ -77,6 +77,12 @@ export abstract class Rig {
   get active(): boolean { return true; }
 
   /**
+   * Called by Stage once per animation frame, before rendering. Override to
+   * keep derived objects (planes, overlays) in sync with the scene graph.
+   */
+  update(): void {}
+
+  /**
    * Called by Stage after setVisible(true). Override to react to being shown.
    */
   onShow(): void {}

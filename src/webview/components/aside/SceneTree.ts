@@ -171,6 +171,7 @@ export class SceneTree extends LitElement {
   private renderRow(obj: SceneObjectDescriptor) {
     const selected = this.sceneContext.selectedId === obj.id;
     const isActiveCamera = this.sceneContext.activeCameraId === obj.id;
+    const meta = sceneObjectMeta[obj.type];
 
     return html`
       <div
@@ -180,26 +181,30 @@ export class SceneTree extends LitElement {
           disabled: !obj.active,
           hidden: !obj.visible,
         })}
-        title=${t("scene.row.tip", sceneObjectMeta[obj.type].label)}
+        title=${t("scene.row.tip", meta.label)}
         @click=${() => this.sceneContext.selectObject(obj.id)}
       >
-        <scad-icon name=${sceneObjectMeta[obj.type].icon}></scad-icon>
+        <scad-icon name=${meta.icon}></scad-icon>
         <span class="object-name">${obj.name}</span>
-        <scad-icon-button
-          class="remove-button"
-          label=${t("scene.remove")}
-          tooltip=${isActiveCamera
-            ? t("scene.removeActiveCamera.tip")
-            : t("scene.remove.tip")}
-          ?disabled=${isActiveCamera}
-          @click=${(e: Event) => {
-            e.stopPropagation();
-            if (!isActiveCamera) this.sceneContext.removeObject(obj.id);
-          }}
-        >
-          <scad-icon name="trash"></scad-icon>
-        </scad-icon-button>
-        ${sceneObjectMeta[obj.type].supportsActive
+        ${meta.fromModel
+          ? nothing
+          : html`
+              <scad-icon-button
+                class="remove-button"
+                label=${t("scene.remove")}
+                tooltip=${isActiveCamera
+                  ? t("scene.removeActiveCamera.tip")
+                  : t("scene.remove.tip")}
+                ?disabled=${isActiveCamera}
+                @click=${(e: Event) => {
+                  e.stopPropagation();
+                  if (!isActiveCamera) this.sceneContext.removeObject(obj.id);
+                }}
+              >
+                <scad-icon name="trash"></scad-icon>
+              </scad-icon-button>
+            `}
+        ${meta.supportsActive
           ? html`
               <scad-icon-button
                 label=${obj.active ? t("scene.disable") : t("scene.enable")}
@@ -220,7 +225,7 @@ export class SceneTree extends LitElement {
           label=${obj.visible ? t("scene.hide") : t("scene.show")}
           tooltip=${isActiveCamera
             ? t("scene.visibleActiveCamera.tip")
-            : t("scene.visible.tip")}
+            : meta.visibleTip}
           toggleable
           .checked=${obj.visible}
           ?disabled=${isActiveCamera}

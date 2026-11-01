@@ -4,7 +4,7 @@
   "description": "%extension.description%",
   "publisher": "electropol-fr",
   "version": "2026.10.0",
-  "buildNumber": 12,
+  "buildNumber": 13,
   "icon": "icon.png",
   "author": "Thijs Daniels, Frank SAURET",
   "license": "MIT",

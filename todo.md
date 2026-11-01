@@ -2,6 +2,18 @@
 
 Rien en attente.
 
+# v2026.10.0.13
+
+1. ✅ Pièces du modèle sélectionnables : nouveau rig `ModelPartRig` (contrat `Rig`), un par enfant du groupe 3MF (élément de construction) ou le maillage STL. Pivot au centre de la boîte englobante (gizmo Déplacer/Pivoter autour du centre), matériaux clonés par pièce (le chargeur 3MF les partage entre objets de même couleur).
+2. ✅ `Stage` : `registerModelParts` / `clearModelParts` à chaque `loadModelData`. Id `model-part:<nom 3MF>` (`#n` si doublon) → sélection reprise si le nom existe encore, sinon effacée. Pose d'inspection gardée tant que les données sont identiques (rechargement sur changement d'option d'affichage), perdue au rendu suivant.
+3. ✅ Clic : lancer de rayon commun scène + pièces, le plus proche gagne ; un point retiré par un plan de coupe (`clippingPlanes` du matériau) n'est pas un impact.
+4. ✅ Mise en évidence : teinte émissive (accent × 0,35) + contour `EdgesGeometry` (30°) hors du groupe modèle (`outline`, ajouté à la scène), donc invisible pour la passe rayons X et les stencils ; découpé par les plans de coupe actifs.
+5. ✅ `Rig.update()` appelé à chaque image pour tous les rigs (remplace l'appel réservé à `CrossSectionRig`). `CrossSectionRig` : les maillages de stencil suivent la matrice et la visibilité de leur maillage source (pièce masquée ou déplacée).
+6. ✅ `sceneObjectMeta` : champs `fromModel` (pas de suppression, pas de sauvegarde dans la scène persistée) et `visibleTip`. `App.syncModelParts` place les pièces en tête de l'arbre et réapplique leur masquage.
+7. ✅ Propriétés : section Pièce (nom, couleurs, triangles) via nouvel atome `ValueBox`, Dimensions, Inspection (position du centre, rotation). Icône `model-part` (cube orange isométrique).
+8. ✅ Test hors navigateur du rig (pivot, dimensions, triangles, couleur, teinte isolée, contour, masquage, rotation) : OK.
+9. ⏳ README (anglais) : documenter la sélection des pièces avant publication.
+
 # v2026.10.0.12
 
 1. ✅ Aperçu automatique figé par défaut (`ScadSession._autoRender = true`, état initial de la vue web aligné) ; bulle du bouton Prévisualiser complétée.

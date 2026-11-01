@@ -11,6 +11,7 @@ import {
   NumberFieldInputEvent,
 } from "../atoms/NumberField";
 import "../atoms/Field";
+import "../atoms/ValueBox";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -132,6 +133,38 @@ export class ObjectProperties extends LitElement {
           ${this.renderDisplayField("ΔY", properties.deltaY, " mm", "properties.delta.tip")}
           ${this.renderDisplayField("ΔZ", properties.deltaZ, " mm", "properties.delta.tip")}
           ${this.renderDisplayField(t("properties.total"), properties.distance, " mm", "properties.total.tip")}
+        </scad-collapsible>
+      `;
+    }
+
+    if (properties.type === "model-part") {
+      return html`
+        <scad-collapsible heading=${t("properties.part")} open>
+          <scad-field label=${t("properties.name")} tooltip=${t("properties.name.tip")}>
+            <scad-value-box .text=${properties.name}></scad-value-box>
+          </scad-field>
+          <scad-field label=${t("properties.colors")} tooltip=${t("properties.colors.tip")}>
+            <scad-value-box
+              .colors=${properties.colors}
+              .text=${properties.colors.join(", ") || t("properties.colors.none")}
+            ></scad-value-box>
+          </scad-field>
+          <scad-field label=${t("properties.triangles")} tooltip=${t("properties.triangles.tip")}>
+            <scad-value-box .text=${properties.triangles.toLocaleString()}></scad-value-box>
+          </scad-field>
+        </scad-collapsible>
+        <scad-collapsible heading=${t("properties.size")} open>
+          ${this.renderDisplayField("X", properties.sizeX, " mm", "properties.sizeX.tip")}
+          ${this.renderDisplayField("Y", properties.sizeY, " mm", "properties.sizeY.tip")}
+          ${this.renderDisplayField("Z", properties.sizeZ, " mm", "properties.sizeZ.tip")}
+        </scad-collapsible>
+        <scad-collapsible heading=${t("properties.inspect")}>
+          ${this.renderField("X", "positionX", properties.positionX, "properties.inspectPosition.tip")}
+          ${this.renderField("Y", "positionY", properties.positionY, "properties.inspectPosition.tip")}
+          ${this.renderField("Z", "positionZ", properties.positionZ, "properties.inspectPosition.tip")}
+          ${this.renderField(`${t("properties.rotation")} X`, "rotationX", properties.rotationX, "properties.inspectRotation.tip", -180, 180)}
+          ${this.renderField(`${t("properties.rotation")} Y`, "rotationY", properties.rotationY, "properties.inspectRotation.tip", -180, 180)}
+          ${this.renderField(`${t("properties.rotation")} Z`, "rotationZ", properties.rotationZ, "properties.inspectRotation.tip", -180, 180)}
         </scad-collapsible>
       `;
     }

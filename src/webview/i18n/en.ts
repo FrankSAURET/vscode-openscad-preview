@@ -117,6 +117,7 @@ export const en = {
   "scene.hide": "Hide",
   "scene.visible.tip": "Show or hide the helper of this object in the 3D view.",
   "scene.visibleActiveCamera.tip": "The active camera cannot be hidden.",
+  "scene.visiblePart.tip": "Show or hide this model part in the 3D view.",
 
   // Scene object types
   "object.camera": "Camera",
@@ -126,6 +127,7 @@ export const en = {
   "object.spotLight": "Spot Light",
   "object.pointLight": "Point Light",
   "object.measurement": "Measurement",
+  "object.modelPart": "Model Part",
 
   // Object properties
   "properties.empty": "No object selected.",
@@ -157,6 +159,21 @@ export const en = {
   "properties.pointB.tip": "Coordinate of the second measured point.",
   "properties.delta.tip": "Distance between the two points along this axis.",
   "properties.total.tip": "Straight-line distance between the two points.",
+  "properties.part": "Part",
+  "properties.name": "Name",
+  "properties.name.tip": "Object name in the 3MF file (one object per top-level part when openscad.enableLazyUnion is on).",
+  "properties.colors": "Color",
+  "properties.colors.tip": "Color of the part: set by color() in the code, otherwise the default color.",
+  "properties.colors.none": "None",
+  "properties.triangles": "Triangles",
+  "properties.triangles.tip": "Number of triangles in the part's mesh.",
+  "properties.size": "Size",
+  "properties.sizeX.tip": "Bounding box size along X (mm).",
+  "properties.sizeY.tip": "Bounding box size along Y (mm).",
+  "properties.sizeZ.tip": "Bounding box size along Z (mm).",
+  "properties.inspect": "Inspection (visual only)",
+  "properties.inspectPosition.tip": "Centre of the part (mm). Moving it is only visual: undone at the next render, never written to the .scad file.",
+  "properties.inspectRotation.tip": "Rotation of the part around its centre (degrees). Only visual: undone at the next render, never written to the .scad file.",
 
   // Environment tab
   "environment.fog": "Fog",

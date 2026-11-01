@@ -229,6 +229,8 @@ export const drawnIcons = {
     );
   })(),
 
+  "model-part": defs(ramp("part", "orange")) + solidBox(cube, "part", "orange"),
+
   "snap-vertex": snapCube(marker(cube.R)),
 
   "snap-edge": snapCube(

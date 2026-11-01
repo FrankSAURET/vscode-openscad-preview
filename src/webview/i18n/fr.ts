@@ -116,6 +116,7 @@ export const fr: Record<MessageKey, string> = {
   "scene.hide": "Masquer",
   "scene.visible.tip": "Afficher ou masquer le repère de cet objet dans la vue 3D.",
   "scene.visibleActiveCamera.tip": "La caméra active ne peut pas être masquée.",
+  "scene.visiblePart.tip": "Afficher ou masquer cette pièce du modèle dans la vue 3D.",
 
   // Types d'objets de la scène
   "object.camera": "Caméra",
@@ -125,6 +126,7 @@ export const fr: Record<MessageKey, string> = {
   "object.spotLight": "Projecteur",
   "object.pointLight": "Lumière ponctuelle",
   "object.measurement": "Mesure",
+  "object.modelPart": "Pièce",
 
   // Propriétés de l'objet
   "properties.empty": "Aucun objet sélectionné.",
@@ -156,6 +158,21 @@ export const fr: Record<MessageKey, string> = {
   "properties.pointB.tip": "Coordonnée du second point mesuré.",
   "properties.delta.tip": "Écart entre les deux points sur cet axe.",
   "properties.total.tip": "Distance en ligne droite entre les deux points.",
+  "properties.part": "Pièce",
+  "properties.name": "Nom",
+  "properties.name.tip": "Nom de l'objet dans le fichier 3MF (un objet par pièce de premier niveau quand openscad.enableLazyUnion est activé).",
+  "properties.colors": "Couleur",
+  "properties.colors.tip": "Couleur de la pièce : fixée par color() dans le code, sinon couleur par défaut.",
+  "properties.colors.none": "Aucune",
+  "properties.triangles": "Triangles",
+  "properties.triangles.tip": "Nombre de triangles du maillage de la pièce.",
+  "properties.size": "Dimensions",
+  "properties.sizeX.tip": "Encombrement sur l'axe X (boîte englobante, mm).",
+  "properties.sizeY.tip": "Encombrement sur l'axe Y (boîte englobante, mm).",
+  "properties.sizeZ.tip": "Encombrement sur l'axe Z (boîte englobante, mm).",
+  "properties.inspect": "Inspection (visuel seulement)",
+  "properties.inspectPosition.tip": "Centre de la pièce (mm). Le déplacement est purement visuel : annulé au prochain rendu, jamais écrit dans le .scad.",
+  "properties.inspectRotation.tip": "Rotation de la pièce autour de son centre (degrés). Purement visuel : annulé au prochain rendu, jamais écrit dans le .scad.",
 
   // Onglet Environnement
   "environment.fog": "Brouillard",
