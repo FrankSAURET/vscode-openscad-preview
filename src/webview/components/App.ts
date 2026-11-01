@@ -161,6 +161,7 @@ export class App extends LitElement {
     toggleAutoRender: () => {
       bridge.setAutoRender(!this.modelContext.autoRender);
     },
+    openSettings: () => bridge.openSettings(),
   };
 
   @provide({ context: activeToolContext })

@@ -181,7 +181,26 @@ function glossyPath(d: string, palette: PaletteName) {
   );
 }
 
+/** Orange ruler with a black outline and black graduations (long every other tick). */
+const ruler =
+  defs(ramp("fill", "orange")) +
+  `<rect x="1" y="4.5" width="14" height="7" rx="1" fill="url(#fill)"/>` +
+  `<rect x="1" y="4.5" width="14" height="7" rx="1" fill="url(#gloss)"/>` +
+  [3.5, 5.75, 8, 10.25, 12.5]
+    .map((x, i) =>
+      line(
+        [x, 4.5],
+        [x, 4.5 + (i % 2 ? 2.2 : 3.6)],
+        `stroke="#000" stroke-width=".9"`,
+      ),
+    )
+    .join("") +
+  `<rect x="1" y="4.5" width="14" height="7" rx="1" fill="none" stroke="#000" stroke-width="1"/>`;
+
 export const drawnIcons = {
+  "tool-measure": ruler,
+  measurement: ruler,
+
   "tool-move": glossyPath(
     "M8 1 L5.5 4 H7.1 V7.1 H4 V5.5 L1 8 L4 10.5 V8.9 H7.1 V12 H5.5 L8 15 L10.5 12 H8.9 V8.9 H12 V10.5 L15 8 L12 5.5 V7.1 H8.9 V4 H10.5 Z",
     "green",

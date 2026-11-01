@@ -14,6 +14,8 @@ export interface ModelContext {
   sendToSlicer: () => void;
   renderNow: () => void;
   toggleAutoRender: () => void;
+  /** Opens the VS Code settings editor on this extension's settings. */
+  openSettings: () => void;
 }
 
 export const modelContext = createContext<ModelContext>("model");

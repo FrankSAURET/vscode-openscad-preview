@@ -73,6 +73,10 @@ export class Bridge {
     vscode.postMessage({ type: "renderNow" });
   }
 
+  public openSettings() {
+    vscode.postMessage({ type: "openSettings" });
+  }
+
   public setParameterLabel(mode: ParameterLabelMode) {
     vscode.postMessage({ type: "setParameterLabel", mode });
   }

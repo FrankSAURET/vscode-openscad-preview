@@ -4,6 +4,8 @@
  */
 export const en = {
   // Toolbar
+  "toolbar.settings": "Settings",
+  "toolbar.settings.tip": "Settings: open this extension's settings.",
   "tool.select": "Select",
   "tool.select.tip": "Select: click an object in the 3D view to select it and edit its properties.",
   "tool.move": "Move",

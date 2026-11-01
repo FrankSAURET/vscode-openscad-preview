@@ -3,6 +3,8 @@ import type { MessageKey } from "./en";
 /** Traduction française des textes de la vue web. */
 export const fr: Record<MessageKey, string> = {
   // Barre d'outils
+  "toolbar.settings": "Paramètres de l'extension",
+  "toolbar.settings.tip": "Paramètres : ouvrir les réglages de l'extension OpenSCAD Preview.",
   "tool.select": "Sélection",
   "tool.select.tip": "Sélection : cliquer sur un objet de la vue 3D pour le sélectionner et modifier ses propriétés.",
   "tool.move": "Déplacer",

@@ -36,8 +36,6 @@ const filled: Record<string, { fluent: string; palette: PaletteName }> = {
   "tool-select": { fluent: "cursor", palette: "blue" },
   "tool-rotate": { fluent: "arrow_rotate_clockwise", palette: "orange" },
   "tool-scale": { fluent: "arrow_maximize", palette: "purple" },
-  "tool-measure": { fluent: "ruler", palette: "orange" },
-  measurement: { fluent: "ruler", palette: "orange" },
   "panel-bottom": { fluent: "panel_bottom", palette: "blue" },
   "panel-side": { fluent: "panel_right", palette: "blue" },
   "save-as": { fluent: "save_copy", palette: "purple" },

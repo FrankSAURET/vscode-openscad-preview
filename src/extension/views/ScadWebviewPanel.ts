@@ -5,6 +5,7 @@ import {
   Uri,
   Webview,
   WebviewPanel,
+  commands,
   env,
   l10n,
   window,
@@ -109,6 +110,13 @@ export class ScadWebviewPanel {
             return;
           case "renderNow":
             this.session.renderNow();
+            return;
+          case "openSettings":
+            // Settings editor filtered on this extension's own settings.
+            commands.executeCommand(
+              "workbench.action.openSettings",
+              "@ext:electropol-fr.openscad-preview-fr",
+            );
             return;
           case "setParameterLabel":
             // Stored globally; the configuration listener echoes it back.

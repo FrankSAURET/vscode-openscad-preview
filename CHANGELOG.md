@@ -18,10 +18,11 @@
 - Sélection des pièces du modèle dans l'aperçu 3D. Avec l'outil Sélection, un clic sur une pièce la sélectionne (contour et reflet de la couleur d'accent, visibles en plein, rayons X et fil de fer, coupés par les plans de coupe) ; un clic dans le vide désélectionne. Avec `openscad.enableLazyUnion`, chaque pièce de premier niveau est sélectionnable à part ; sinon (ou en STL) le modèle forme une seule pièce.
 - Arbre Scène : les pièces du modèle y figurent en tête, sous le nom tiré du 3MF (« OpenSCAD Model 1 »…). Sélection synchronisée entre la vue et l'arbre ; l'œil masque une pièce. Après un nouveau rendu, la sélection et le masquage restent sur la pièce de même nom.
 - Onglet Propriétés d'une pièce : nom, couleur, nombre de triangles, dimensions de la boîte englobante (X, Y, Z en mm). Section « Inspection » et outils Déplacer / Pivoter : la pièce bouge autour de son centre pour mieux la voir. Purement visuel : tout revient en place au prochain rendu, rien n'est écrit dans le `.scad`.
+- Bouton engrenage en haut de la barre d'outils de l'aperçu : il ouvre les réglages de l'extension.
 
 ### Modification
 
-- Toutes les icônes de l'aperçu passent en couleur avec un effet de relief (dégradé, reflet, ombre portée) : outils, options, onglets, scène, préréglages, sortie, bouton d'ouverture de l'aperçu. Les cubes de rendu, d'accrochage, de coupe et de caméra sont dessinés en 3D isométrique. Les icônes de lumière prennent la couleur de la lumière dans la vue 3D. Formes issues des jeux libres Fluent UI System Icons et Codicons (Microsoft, licence MIT). Enregistrer et Déplacer gardent leur dessin habituel, en couleur.
+- Toutes les icônes de l'aperçu passent en couleur avec un effet de relief (dégradé, reflet, ombre portée) : outils, options, onglets, scène, préréglages, sortie, bouton d'ouverture de l'aperçu. Les cubes de rendu, d'accrochage, de coupe et de caméra sont dessinés en 3D isométrique. Les icônes de lumière prennent la couleur de la lumière dans la vue 3D. Formes issues des jeux libres Fluent UI System Icons et Codicons (Microsoft, licence MIT). Enregistrer et Déplacer gardent leur dessin habituel, en couleur. La règle de Mesurer a un contour et des graduations noirs, lisibles sur tout fond.
 - Arbre de scène : l'œil se barre quand un objet est masqué.
 - Onglet Paramètres : la zone « Préréglage » (choix, enregistrement, suppression) reste toujours visible en haut ; seuls les groupes de paramètres défilent.
 - Fork publié sous l'identifiant `electropol-fr.openscad-preview-fr`, numéroté en calver.

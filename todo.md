@@ -1,6 +1,11 @@
 # À faire
 
-Rien en attente.
+- Modifie l'outilde mesure pour qu'il affiche des fleches à la place des points et adhère réellement aux arrêtes ou sommets de l'objet. Echappe doit le déselectionner.
+
+# v2026.10.0.14
+
+1. ✅ Icône Mesurer redessinée (`drawnIcons.ts`, constante `ruler`) : règle orange, contour et graduations noirs, une graduation sur deux plus longue. Partagée par `tool-measure` et `measurement` ; retirées de la table `filled` du générateur.
+2. ✅ Bouton engrenage en tête de la barre d'outils verticale (groupe à part, les autres descendent) : message `openSettings` → `Bridge.openSettings()` → `ModelContext.openSettings` → `workbench.action.openSettings` filtré sur `@ext:electropol-fr.openscad-preview-fr`. Libellé et bulle FR/EN.
 
 # v2026.10.0.13
 
