@@ -5,7 +5,8 @@
 # v2026.10.0.7
 
 1. ✅ Moteur de calcul : réglage `openscad.renderBackend` (`auto` | `manifold` | `cgal`). `auto` sonde `openscad --help` une fois par exécutable (`--backend` présent → Manifold), sinon CGAL + message dans la sortie.
-2. ℹ️ OpenSCAD installé sur le poste : 2021.01 (CGAL seul). Gain réel seulement après installation d'une nightly.
+2. ✅ Détection Windows : `OpenSCAD (Nightly)` passe avant `OpenSCAD` (les deux peuvent coexister).
+3. ℹ️ OpenSCAD installé sur le poste : 2021.01 (CGAL seul). Gain réel seulement après installation d'une nightly.
 
 # v2026.10.0.6
 

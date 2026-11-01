@@ -172,7 +172,21 @@ const frustumBottom = isoBox(8, 11.5, 8, 0);
 const prism = isoBox(8, 3.5, 5.5, 8);
 const halfCube = isoBox(8, 8, 7, 3.5);
 
+/** Flat 2D shape painted with a palette ramp and the gloss highlight. */
+function glossyPath(d: string, palette: PaletteName) {
+  return (
+    defs(ramp("fill", palette)) +
+    `<path d="${d}" fill="url(#fill)" stroke="${iconPalette[palette][1]}" stroke-width=".4" stroke-linejoin="round"/>` +
+    `<path d="${d}" fill="url(#gloss)"/>`
+  );
+}
+
 export const drawnIcons = {
+  "tool-move": glossyPath(
+    "M8 1 L5.5 4 H7.1 V7.1 H4 V5.5 L1 8 L4 10.5 V8.9 H7.1 V12 H5.5 L8 15 L10.5 12 H8.9 V8.9 H12 V10.5 L15 8 L12 5.5 V7.1 H8.9 V4 H10.5 Z",
+    "green",
+  ),
+
   "render-solid": defs(ramp("side", "blue")) + solidBox(cube, "side", "blue"),
 
   "render-xray": (() => {

@@ -8,7 +8,7 @@
 - Bulle d'aide au survol de chaque contrôle de l'aperçu : elle explique ce que fait le bouton, le champ ou l'onglet.
 - Bouton « Prévisualiser » en tête des options : le modèle est calculé une fois à l'ouverture de l'aperçu, puis n'est plus recalculé tout seul. Un clic lance le calcul ; Ctrl+clic fige l'aperçu automatique (bouton grisé), qui recalcule alors à chaque modification ; Ctrl+clic à nouveau le libère. Un bandeau signale les modifications pas encore calculées.
 
-- Calcul du modèle bien plus rapide avec un OpenSCAD récent (2024 ou plus, version « nightly ») : le moteur Manifold est choisi automatiquement. Réglage `openscad.renderBackend` (`auto`, `manifold`, `cgal`) pour forcer le moteur. Avec OpenSCAD 2021, rien ne change (moteur CGAL, lent) ; un message dans la sortie « OpenSCAD Preview » le signale.
+- Calcul du modèle bien plus rapide avec un OpenSCAD récent (2024 ou plus, version « nightly ») : le moteur Manifold est choisi automatiquement. Réglage `openscad.renderBackend` (`auto`, `manifold`, `cgal`) pour forcer le moteur. Sous Windows, une nightly installée est préférée à la version 2021 si les deux sont présentes. Avec OpenSCAD 2021, rien ne change (moteur CGAL, lent) ; un message dans la sortie « OpenSCAD Preview » le signale.
 
 - Onglet Paramètres : bouton « Libellé depuis la description » (à côté du préréglage) et réglage `openscad.parameterLabel`. Activé, chaque champ affiche le commentaire écrit au-dessus de sa variable, accents compris, au lieu du nom de la variable. Sans commentaire, le nom reste affiché. Le choix est mémorisé.
 

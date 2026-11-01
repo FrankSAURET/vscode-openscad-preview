@@ -11,11 +11,12 @@ type RenderBackend = "auto" | "manifold" | "cgal";
 
 const platformDefaults: Record<string, string[]> = {
   darwin: ["/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD"],
+  // Nightly first: it ships the fast Manifold engine, the 2021 release does not.
   win32: [
-    "C:\\Program Files\\OpenSCAD\\openscad.exe",
-    "C:\\Program Files (x86)\\OpenSCAD\\openscad.exe",
     "C:\\Program Files\\OpenSCAD (Nightly)\\openscad.exe",
     "C:\\Program Files (x86)\\OpenSCAD (Nightly)\\openscad.exe",
+    "C:\\Program Files\\OpenSCAD\\openscad.exe",
+    "C:\\Program Files (x86)\\OpenSCAD\\openscad.exe",
   ],
   linux: ["/usr/bin/openscad", "/usr/local/bin/openscad"],
 };
