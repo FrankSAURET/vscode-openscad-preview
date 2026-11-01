@@ -4,7 +4,6 @@
   "config.previewFormat": "Format utilisé pour l'aperçu 3D. Le 3MF gère les couleurs mais exige OpenSCAD Nightly. Le STL est reconnu partout.",
   "config.slicerExecutable": "Chemin facultatif du trancheur (ex. Bambu Studio ou PrusaSlicer). Vide : l'application par défaut du système pour les modèles 3D est utilisée.",
   "config.executablePath": "Chemin de l'exécutable OpenSCAD. Vide : détection automatique ou PATH du système.",
-  "config.enableLazyUnion": "Activer les unions paresseuses (lazy union) : l'objet exporté comporte plusieurs pièces.",
   "config.renderBackend": "Moteur de géométrie utilisé pour calculer le modèle.",
   "config.renderBackend.auto": "Manifold si OpenSCAD le permet (2024 ou plus récent), sinon CGAL.",
   "config.renderBackend.manifold": "Manifold : rapide (OpenSCAD récent requis).",

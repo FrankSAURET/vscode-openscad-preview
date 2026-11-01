@@ -4,7 +4,7 @@
   "description": "%extension.description%",
   "publisher": "electropol-fr",
   "version": "2026.10.0",
-  "buildNumber": 15,
+  "buildNumber": 16,
   "icon": "icon.png",
   "author": "Thijs Daniels, Frank SAURET",
   "license": "MIT",
@@ -80,11 +80,6 @@
           "type": "string",
           "default": "",
           "description": "%config.executablePath%"
-        },
-        "openscad.enableLazyUnion": {
-          "type": "boolean",
-          "default": false,
-          "description": "%config.enableLazyUnion%"
         },
         "openscad.renderBackend": {
           "type": "string",

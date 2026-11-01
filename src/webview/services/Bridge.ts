@@ -73,6 +73,10 @@ export class Bridge {
     vscode.postMessage({ type: "renderNow" });
   }
 
+  public setExplode(enabled: boolean) {
+    vscode.postMessage({ type: "setExplode", enabled });
+  }
+
   public openSettings() {
     vscode.postMessage({ type: "openSettings" });
   }

@@ -1,4 +1,4 @@
-import { EventEmitter, Uri, workspace } from "vscode";
+import { EventEmitter, Memento, Uri, workspace } from "vscode";
 import { ModelFormat } from "../../shared/types/ModelFormat";
 import { ScadParameter } from "../../shared/types/ScadParameter";
 import { ScadClient } from "../services/ScadClient";
@@ -54,7 +54,24 @@ export class ScadSession {
   // The first render (at launch) always happens, whatever the mode.
   private hasRendered = false;
 
-  constructor(public readonly documentUri: Uri) {
+  private _onExplodeChanged = new EventEmitter<boolean>();
+  public readonly onExplodeChanged = this._onExplodeChanged.event;
+
+  // Exploded (lazy union): one part per top-level object. Remembered per file.
+  private _explode: boolean;
+
+  private get explodeStateKey(): string {
+    return `openscad.explode.${this.documentUri.toString()}`;
+  }
+
+  constructor(
+    public readonly documentUri: Uri,
+    private readonly workspaceState: Memento,
+  ) {
+    // Read before the watcher starts: its first change triggers a render.
+    this._explode = workspaceState.get<boolean>(this.explodeStateKey, false);
+
+
     this.scadRenderer = new ScadRenderer({
       onStart: () => this._onRenderStarted.fire(),
       onComplete: (data) => this._onRenderCompleted.fire(data),
@@ -155,8 +172,21 @@ export class ScadSession {
     this.scadRenderer.render(
       this.documentUri.fsPath,
       this.scadParameters.getActiveValues(),
+      this._explode,
     );
     this._onAutoRenderChanged.fire(this.autoRender);
+  }
+
+  public get explode(): boolean {
+    return this._explode;
+  }
+
+  /** Splits the model into its top-level parts (or merges it) and re-renders. */
+  public setExplode(enabled: boolean) {
+    this._explode = enabled;
+    this.workspaceState.update(this.explodeStateKey, enabled);
+    this._onExplodeChanged.fire(enabled);
+    this.renderNow();
   }
 
   private requestRender() {
@@ -172,6 +202,7 @@ export class ScadSession {
     this.scadRenderer.render(
       this.documentUri.fsPath,
       this.scadParameters.getActiveValues(),
+      this._explode,
     );
   }
 
@@ -252,6 +283,8 @@ export class ScadSession {
       this.documentUri.fsPath,
       this.scadParameters.getActiveValues(),
       format,
+      undefined,
+      this._explode,
     );
   }
 
@@ -263,5 +296,6 @@ export class ScadSession {
     this._onRenderError.dispose();
     this._onParametersChanged.dispose();
     this._onAutoRenderChanged.dispose();
+    this._onExplodeChanged.dispose();
   }
 }

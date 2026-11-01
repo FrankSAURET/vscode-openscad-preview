@@ -58,14 +58,6 @@ export class ScadClient {
     return "openscad";
   }
 
-  private static get enableLazyUnion(): string[] {
-    const setting = workspace
-      .getConfiguration("openscad")
-      .get<boolean>("enableLazyUnion", false);
-
-    return setting ? ["--enable", "lazy-union"] : [];
-  }
-
   // Probe result per executable: does it accept `--backend` (OpenSCAD ≥ 2024)?
   private static backendSupport = new Map<string, Promise<boolean>>();
 
@@ -106,6 +98,8 @@ export class ScadClient {
     parameters: Record<string, string | number | boolean> = {},
     format: ModelFormat = ModelFormat.ThreeMF,
     onStderr?: (chunk: string) => void,
+    // Lazy union: each top-level object becomes its own part in the export.
+    explode = false,
   ): Promise<Buffer> {
     // Kill any currently running process for this file to prevent runaway
     // spawn leaks when sliders emit rapid updates.
@@ -138,7 +132,7 @@ export class ScadClient {
         "--export-format",
         format,
         ...backend,
-        ...this.enableLazyUnion,
+        ...(explode ? ["--enable", "lazy-union"] : []),
         "-o",
         tmpFile,
         ...paramArgs,

@@ -111,6 +111,9 @@ export class ScadWebviewPanel {
           case "renderNow":
             this.session.renderNow();
             return;
+          case "setExplode":
+            this.session.setExplode(message.enabled);
+            return;
           case "openSettings":
             // Settings editor filtered on this extension's own settings.
             commands.executeCommand(
@@ -255,6 +258,16 @@ export class ScadWebviewPanel {
       this.disposables,
     );
 
+    this.session.onExplodeChanged(
+      (enabled) => {
+        if (this.isWebviewReady) {
+          this.postMessage({ type: "explode", enabled });
+        }
+      },
+      null,
+      this.disposables,
+    );
+
     this.session.onLog(
       (message) => {
         if (this.isWebviewReady) {
@@ -367,6 +380,7 @@ export class ScadWebviewPanel {
 
     // The webview is recreated on tab re-focus: restore the toggle state.
     this.postMessage({ type: "autoRender", ...this.session.autoRender });
+    this.postMessage({ type: "explode", enabled: this.session.explode });
     this.postParameterLabel();
     this.postDefaultColor();
 

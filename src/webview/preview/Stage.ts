@@ -341,7 +341,7 @@ export class Stage {
         });
         this.modelGroup.add(group);
         // One child per 3MF build item: one per top-level object with
-        // openscad.enableLazyUnion, otherwise a single merged object.
+        // the Explode toggle (lazy union), otherwise a single merged object.
         parts = [...group.children];
       } catch (e) {
         console.error("Failed to parse 3MF:", e);

@@ -155,11 +155,15 @@ export class App extends LitElement {
     loadingMessage: t("preview.rendering"),
     autoRender: true,
     renderPending: false,
+    explode: false,
     export: bridge.exportModel,
     sendToSlicer: bridge.sendToSlicer,
     renderNow: () => bridge.renderNow(),
     toggleAutoRender: () => {
       bridge.setAutoRender(!this.modelContext.autoRender);
+    },
+    toggleExplode: () => {
+      bridge.setExplode(!this.modelContext.explode);
     },
     openSettings: () => bridge.openSettings(),
   };
@@ -498,6 +502,9 @@ export class App extends LitElement {
           autoRender: message.enabled,
           renderPending: message.pending,
         };
+        break;
+      case "explode":
+        this.modelContext = { ...this.modelContext, explode: message.enabled };
         break;
       case "log":
         if (message.message) {

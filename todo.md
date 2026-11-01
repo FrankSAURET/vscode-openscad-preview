@@ -1,5 +1,11 @@
 # À faire
 
+# v2026.10.0.16
+
+1. ✅ Réglage `openscad.enableLazyUnion` supprimé (package.json, nls EN/FR). Remplacé par un bouton bascule « Éclater » dans l'en-tête de l'arbre Scène (icône `explode` : trois cubes orange écartés).
+2. ✅ État porté par `ScadSession` (`explode`, `setExplode` → `renderNow`, recalcul même aperçu libéré), mémorisé par fichier dans `workspaceState` (`openscad.explode.<uri>`, lu avant le premier rendu). Passé à `ScadClient.render` (`--enable lazy-union`), export et trancheur compris.
+3. ✅ Messages `setExplode` / `explode`, `ModelContext.explode` + `toggleExplode`. Libellé et bulle FR/EN.
+
 # v2026.10.0.15
 
 1. ✅ Mesure : extrémités en flèches de cote. Widget `widgets/MeasureArrow.ts` (CSS2D, SVG tourné dans `onBeforeRender` d'après la projection des deux points, rapport d'aspect tiré de la caméra), partagé par `MeasurementRig` et l'aperçu de `MeasureTool`. Anneau creux pour le point survolé.

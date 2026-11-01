@@ -250,6 +250,13 @@ export const drawnIcons = {
 
   "model-part": defs(ramp("part", "orange")) + solidBox(cube, "part", "orange"),
 
+  // Three orange parts pulled apart.
+  explode:
+    defs(ramp("part", "orange")) +
+    [isoBox(4, 2.5, 4, 4), isoBox(12, 2.5, 4, 4), isoBox(8, 9, 4, 4)]
+      .map((box) => solidBox(box, "part", "orange"))
+      .join(""),
+
   "snap-vertex": snapCube(marker(cube.R)),
 
   "snap-edge": snapCube(

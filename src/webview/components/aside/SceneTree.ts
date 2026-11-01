@@ -12,6 +12,7 @@ import {
   SceneObjectDescriptor,
   SceneObjectType,
 } from "../../contexts/SceneContext";
+import { ModelContext, modelContext } from "../../contexts/ModelContext";
 import { sceneObjectMeta } from "../../data/sceneObjectMeta";
 import { t } from "../../i18n/t";
 import "../atoms/Icon";
@@ -73,6 +74,8 @@ export class SceneTree extends LitElement {
 
     .header-actions {
       position: relative;
+      display: flex;
+      gap: 2px;
     }
 
     vscode-context-menu {
@@ -135,6 +138,10 @@ export class SceneTree extends LitElement {
   @state()
   private sceneContext!: SceneContext;
 
+  @consume({ context: modelContext, subscribe: true })
+  @state()
+  private modelContext?: ModelContext;
+
   @query("vscode-context-menu")
   private addMenu!: VscodeContextMenu;
 
@@ -143,6 +150,15 @@ export class SceneTree extends LitElement {
       <div class="header">
         <span class="heading">${t("scene.heading")}</span>
         <div class="header-actions">
+          <scad-icon-button
+            label=${t("scene.explode")}
+            tooltip=${t("scene.explode.tip")}
+            toggleable
+            .checked=${this.modelContext?.explode ?? false}
+            @change=${() => this.modelContext?.toggleExplode()}
+          >
+            <scad-icon name="explode"></scad-icon>
+          </scad-icon-button>
           <scad-icon-button
             label=${t("scene.add")}
             tooltip=${t("scene.add.tip")}

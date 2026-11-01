@@ -15,10 +15,11 @@
 - Onglet Paramètres : éditeur adapté pour les paramètres texte. Couleur : pastille qui ouvre la palette, à côté du texte (`#rrvvbb` ou nom OpenSCAD). Fichier ou dossier : bouton Parcourir, chemin enregistré relatif au fichier `.scad`. Police : choix de la police installée puis de son style (Normal, Bold, Italic, Bold Italic). L'éditeur se choisit par un indice en fin de ligne — `// [color]`, `// [file]`, `// [file:svg,dxf]`, `// [folder]`, `// [font]` (ou `couleur`, `fichier`, `dossier`, `police`) — ou se devine : valeur `#ff8800` ou `logo.svg`, nom de variable contenant `color`/`couleur`, `font`/`police`, `file`/`fichier`/`path`/`chemin`, `folder`/`dossier`/`dir`.
 - Réglage `openscad.defaultColor` : couleur du modèle là où le code ne fixe aucune `color()`. Blanc cassé par défaut ; vide, la couleur du texte de l'éditeur (ancien comportement).
 - Onglet Paramètres : trois boutons dans l'en-tête « Paramètres » pour les groupes. « Accordéon » replie tout, puis un seul groupe reste ouvert à la fois ; un nouveau clic quitte ce mode. « Tout déplier » et « Tout replier » partent de tout ouvert ou tout fermé, puis chaque groupe s'ouvre et se ferme librement.
-- Sélection des pièces du modèle dans l'aperçu 3D. Avec l'outil Sélection, un clic sur une pièce la sélectionne (contour et reflet de la couleur d'accent, visibles en plein, rayons X et fil de fer, coupés par les plans de coupe) ; un clic dans le vide désélectionne. Avec `openscad.enableLazyUnion`, chaque pièce de premier niveau est sélectionnable à part ; sinon (ou en STL) le modèle forme une seule pièce.
+- Sélection des pièces du modèle dans l'aperçu 3D. Avec l'outil Sélection, un clic sur une pièce la sélectionne (contour et reflet de la couleur d'accent, visibles en plein, rayons X et fil de fer, coupés par les plans de coupe) ; un clic dans le vide désélectionne. Avec le bouton Éclater, chaque pièce de premier niveau est sélectionnable à part ; sinon (ou en STL) le modèle forme une seule pièce.
 - Arbre Scène : les pièces du modèle y figurent en tête, sous le nom tiré du 3MF (« OpenSCAD Model 1 »…). Sélection synchronisée entre la vue et l'arbre ; l'œil masque une pièce. Après un nouveau rendu, la sélection et le masquage restent sur la pièce de même nom.
 - Onglet Propriétés d'une pièce : nom, couleur, nombre de triangles, dimensions de la boîte englobante (X, Y, Z en mm). Section « Inspection » et outils Déplacer / Pivoter : la pièce bouge autour de son centre pour mieux la voir. Purement visuel : tout revient en place au prochain rendu, rien n'est écrit dans le `.scad`.
 - Bouton engrenage en haut de la barre d'outils de l'aperçu : il ouvre les réglages de l'extension.
+- Bouton « Éclater » (bascule) dans l'en-tête de l'arbre Scène : il recalcule aussitôt le modèle avec une pièce par objet de premier niveau (lazy union d'OpenSCAD), chacune sélectionnable et exportée à part ; un nouveau clic les fusionne. Le choix est mémorisé pour chaque fichier.
 
 ### Modification
 
@@ -28,6 +29,7 @@
 - Fork publié sous l'identifiant `electropol-fr.openscad-preview-fr`, numéroté en calver.
 - Outil Mesurer : chaque extrémité de la mesure est une flèche de cote qui pointe sur le point mesuré, à la place du point rond. Pendant la visée, un anneau montre où le point va se poser.
 - Outil Mesurer : Échap quitte l'outil (retour à Sélection), comme les autres outils.
+- Réglage `openscad.enableLazyUnion` supprimé : remplacé par le bouton Éclater de l'arbre Scène.
 
 ### Correction
 
